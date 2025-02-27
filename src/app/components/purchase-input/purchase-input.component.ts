@@ -13,8 +13,6 @@ export class PurchaseInputComponent implements OnInit {
   @Output() public goNext: EventEmitter<number> = new EventEmitter();
   public input!:number;
 
-  constructor() { }
-
   ngOnInit() {
     document.getElementById('input')?.focus();
   }

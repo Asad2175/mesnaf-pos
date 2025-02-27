@@ -5,6 +5,7 @@ import { CoupenComponent } from './coupen/coupen.component';
 import { MaterialModule } from '../../material.module';
 import { SharedModule } from '../../shared.module';
 import { AccessCodeComponent } from './access-code/access-code.component';
+import { CoupenDetailsComponent } from './coupen/details/details.component';
 
 @NgModule({
   imports: [
@@ -13,6 +14,6 @@ import { AccessCodeComponent } from './access-code/access-code.component';
     MaterialModule,
     SharedModule
   ],
-  declarations: [CoupenComponent, AccessCodeComponent]
+  declarations: [CoupenComponent, AccessCodeComponent, CoupenDetailsComponent]
 })
 export class PurchaseModule { }

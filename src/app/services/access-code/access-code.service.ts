@@ -12,9 +12,9 @@ import { BaseApiResponse } from '../../helper/base-api.interface';
 })
 export class AccessCodeService {
 
-constructor(private readonly httpClient: HttpClient,
-  @Inject(API_URL) private backendUrl: string
-) {}
+  constructor(private readonly httpClient: HttpClient,
+    @Inject(API_URL) private backendUrl: string
+  ) {}
 
 
   public save(item: Purchase): Observable<PurchaseItem> {

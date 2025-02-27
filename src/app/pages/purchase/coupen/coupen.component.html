@@ -1,3 +1,28 @@
-<p>
-  coupen works!
-</p>
+<app-back (back)="goBack()">
+  @if(step === 2) {
+  <div class="top-details">
+    <div class="amount" appFontSwitcher>300.00</div>
+    <div class="coupen-text">
+      <div class="ar" appFontSwitcher>مبلغ القسيمة</div>
+      <div class="en" appFontSwitcher>:Coupon Amount</div>
+    </div>
+    <div class="coupen-title" appFontSwitcher>تفاصيل القسيمة:</div>
+  </div>
+  }
+</app-back>
+
+<div class="purchase-main-section" [class.mb-0]="step === 4">
+  @if(step === 1) {
+  <app-purchase-input (goNext)="validateCoupenNumber($event)" [arabicTitle]="'الرجاء إدخال رقم القسيمة.'" [englishTitle]="'Please Enter the Coupon No.'" [minValue]="8"></app-purchase-input>
+  } @else if(step === 2) {
+  <app-coupen-details (process)="validateCoupenDetails()"></app-coupen-details>
+  } @else if (step === 3) {
+  <app-purchase-input
+    (goNext)="validatePinCode($event)"
+    [englishTitle]="'Please Enter the Coupon Pincode'"
+    [arabicTitle]="'الرجاء إدخال رمز الكوبون البريدي'"
+    [minValue]="4"
+    [maxValue]="4"
+  ></app-purchase-input>
+  }
+</div>

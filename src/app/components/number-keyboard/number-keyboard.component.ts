@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-number-keyboard',
@@ -13,7 +13,10 @@ export class NumberKeyboardComponent implements OnChanges {
   @Output() public validate: EventEmitter<void> = new EventEmitter();
   public inputValue = '';
 
-  constructor() { }
+  @HostListener('document:keydown.enter', ['$event'])
+  handleEnter() {
+    this.enter();
+  }
 
   public ngOnChanges(changes: SimpleChanges): void {
     this.inputValue = String(changes['input'].currentValue ?? '');

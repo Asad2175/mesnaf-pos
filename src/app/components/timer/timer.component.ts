@@ -12,14 +12,12 @@ export class TimerComponent implements OnInit {
   private interval!: number;
   public timer!: string;
 
-  constructor() { }
-
   ngOnInit() {
     this.startTimer(this.time);
   }
 
   private startTimer(time: ExpiryHMSFormat) {
-    let timer = time?.hour * 3600 + time?.minute * 60 + time?.second;
+    let timer = time?.hour * 3600 + time?.minute * 60 + time?.second; 
     
     this.interval = window.setInterval(() => {
       const minutes = Math.floor((timer % 3600) / 60);

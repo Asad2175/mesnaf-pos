@@ -1,0 +1,32 @@
+<div class="coupen-details">
+  <div class="header">
+    <div class="item">
+      <div class="ar" appFontSwitcher>الكمية</div>
+      <div class="en" appFontSwitcher>Quantity</div>
+    </div>
+    <div class="item">
+      <div class="ar" appFontSwitcher>الوحدة</div>
+      <div class="en" appFontSwitcher>Unit</div>
+    </div>
+    <div class="item">
+      <div class="ar" appFontSwitcher>اسم العنصر</div>
+      <div class="en" appFontSwitcher>Item Name</div>
+    </div>
+  </div>
+  <div class="body">
+    <div class="item" appFontSwitcher>02</div>
+    <div class="item" appFontSwitcher>الاسم</div>
+    <div class="item" appFontSwitcher>وصف العنصر</div>
+  </div>
+</div>
+
+<div class="receipt">
+  <div class="buttons">
+    <div>
+      <app-btn-primary [englishLabel]="'Print Coupon'" [arabicLabel]="'طباعة القسيمة'"></app-btn-primary>
+    </div>
+    <div>
+      <app-btn-primary [englishLabel]="'Process'" [arabicLabel]="'العملية'" type="secondary" (clicked)="processClick()"></app-btn-primary>
+    </div>
+  </div>
+</div>
