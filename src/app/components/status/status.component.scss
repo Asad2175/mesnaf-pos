@@ -1,0 +1,122 @@
+:host {
+    .status-main {
+        .title {
+            text-align: center;
+    
+            .ar {
+                font-size: 24px;
+                line-height: 19px;
+                margin-bottom: 15px;
+                color: #1E293B;
+            }
+    
+            .en {
+                color: #9BA5B7;
+                font-size: 16px;
+                line-height: 19px;
+            }
+        }
+    
+        .status {
+            text-align: center;
+            margin-top: 25px;
+            
+            .icon {
+                mat-icon {
+                    height: 76px;
+                    width: auto;
+                }
+            }
+        }
+    
+        .text {
+            margin-top: 15px;
+
+            &.approved {
+                color: #14CE6A;
+            }
+
+            &.rejected {
+                color: Red;
+            }
+        
+            .ar {
+                font-size: 24px;
+                line-height: 19px;
+                margin-bottom: 15px;
+            }
+        
+            .en {
+                font-size: 16px;
+                line-height: 19px;
+                margin-bottom: 15px;
+            }
+        }
+    
+        .amount {
+            margin-top: 25px;
+            text-align: center;
+        
+            .inner {
+                display: inline-block;
+                padding: 15px 35px;
+                background: #F2F8FF;
+                border-radius: 10px;
+        
+                .label {
+                    font-size: 16px;
+                    color: #9BA5B7;
+                }
+        
+                .field {
+                    font-size: 30px;
+                    margin-left: 10px;
+                    font-weight: 600;
+                }
+        
+            }
+        }
+    
+        .receipt {
+            margin-top: 25px;
+            text-align: center;
+        
+            .ar {
+                font-size: 18px;
+                line-height: 19px;
+                margin-bottom: 15px;
+                color: #1E293B;
+            }
+        
+            .en {
+                font-size: 14px;
+                line-height: 19px;
+                color: #9BA5B7;
+            }
+        
+            .buttons {
+                max-width: 870px;
+                margin: 20px auto 0;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 20px;
+
+                @media (max-width: 700px) {
+                    max-width: 100%;
+                    flex-direction: column;
+                }
+    
+                > div {
+                    flex: 1;
+
+                    @media (max-width: 700px) {
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    
+    
+    }
+}

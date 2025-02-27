@@ -1,0 +1,15 @@
+<div class="payment">
+  <div class="title">
+    @if(arabicTitle) {
+    <div class="ar" appFontSwitcher>{{ arabicTitle }}</div>
+    } @if(englishTitle) {
+    <div class="en" appFontSwitcher>{{ englishTitle }}</div>
+    }
+  </div>
+  <div class="key-section">
+    <div class="input">
+      <input id="input" type="number" [(ngModel)]="input" />
+    </div>
+    <app-number-keyboard (value)="getInputValue($event)" (validate)="validateForm()" [min]="minValue" [max]="maxValue" [input]="input"></app-number-keyboard>
+  </div>
+</div>

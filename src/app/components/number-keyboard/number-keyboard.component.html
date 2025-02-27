@@ -1,0 +1,40 @@
+<div class="calculator">
+  <div class="row">
+    <div class="digits" appFontSwitcher (click)="getValue('1')">1</div>
+    <div class="digits" appFontSwitcher (click)="getValue('2')">2</div>
+    <div class="digits" appFontSwitcher (click)="getValue('3')">3</div>
+    <div class="digits" (click)="backSpace()">
+      <mat-icon svgIcon="backspace"></mat-icon>
+    </div>
+  </div>
+  <div class="row">
+    <div class="digits" appFontSwitcher (click)="getValue('4')">4</div>
+    <div class="digits" appFontSwitcher (click)="getValue('5')">5</div>
+    <div class="digits" appFontSwitcher (click)="getValue('6')">6</div>
+    <div class="digits" appFontSwitcher (click)="clearValue()">C</div>
+  </div>
+  <div class="row">
+    <div class="combination">
+      <div class="inner">
+        <div class="digits" appFontSwitcher (click)="getValue('7')">7</div>
+        <div class="digits" appFontSwitcher (click)="getValue('8')">8</div>
+        <div class="digits" appFontSwitcher (click)="getValue('9')">9</div>
+      </div>
+      <div class="inner">
+        <div class="digits" appFontSwitcher (click)="getValue('00')">00</div>
+        <div class="digits" appFontSwitcher (click)="getValue('0')">0</div>
+        <div class="digits" appFontSwitcher>.</div>
+      </div>
+    </div>
+    <div
+      class="enter"
+      (click)="enter()"
+      [style.background-color]="validateMinValue() || validateMaxValue() ? '#EAF3FF' : '#2984FF'"
+      [style.color]="validateMinValue() || validateMaxValue() ? '#1E293B' : '#fff'"
+    >
+      <div appFontSwitcher>إدخال</div>
+      <div appFontSwitcher>Enter</div>
+      <img src="../../../assets/images/box-bg.png" class="bg" />
+    </div>
+  </div>
+</div>

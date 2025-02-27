@@ -1,0 +1,57 @@
+<div class="header">
+  <div class="inner">
+    <div class="logo">
+      <mat-icon svgIcon="logo" [routerLink]="['/']"></mat-icon>
+    </div>
+    <div class="right-side">
+      <div class="user-details" *ngIf="machineDetails">
+        <div class="details">
+          <div class="user">
+            <div class="label" appFontSwitcher>
+              {{ machineDetails.registrationNo }}
+              <div class="icon">
+                <mat-icon svgIcon="notes"></mat-icon>
+              </div>
+            </div>
+            <div class="label" appFontSwitcher>
+              {{ machineDetails.machineSerialNo }}
+              <div class="icon">
+                <mat-icon svgIcon="notes"></mat-icon>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="details">
+          <div class="user">
+            <div class="label" appFontSwitcher>
+              {{ machineDetails.name }}
+              <div class="icon">
+                <mat-icon svgIcon="profile"></mat-icon>
+              </div>
+            </div>
+            <div class="label" appFontSwitcher>
+              {{ machineDetails.branchName }}
+              <div class="icon">
+                <mat-icon svgIcon="shop"></mat-icon>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="icon">
+            <mat-icon svgIcon="profile"></mat-icon>
+          </div> -->
+        </div>
+      </div>
+      <div class="click-icons">
+        <div class="icon">
+          <mat-icon svgIcon="home" [routerLink]="['/']"></mat-icon>
+        </div>
+        <div class="icon">
+          <mat-icon svgIcon="settings" (click)="getMachineSyncDetails()"></mat-icon>
+        </div>
+        <div class="icon" (click)="logout()">
+          <mat-icon svgIcon="logout"></mat-icon>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

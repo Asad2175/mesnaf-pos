@@ -1,0 +1,23 @@
+.back {
+    display: flex;
+
+    .icon {
+        height: 65px;
+        width: 65px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+        background: #EAF3FF;
+        cursor: pointer;
+
+        @media(max-width: 500px) {
+            height: 60px;
+            width: 60px;
+        }
+    }
+
+    .top-back {
+        flex: 1;
+    }
+}

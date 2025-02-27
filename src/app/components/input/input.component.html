@@ -1,0 +1,4 @@
+<div class="field" [ngClass]="{'error-border': hasError}">
+  <input class="inputs-fields" [placeholder]="placeholder" [type]="type" [formControl]="control" autocomplete="false" appInputFontSwitcher />
+  <mat-icon *ngIf="icon" [svgIcon]="icon"></mat-icon>
+</div>

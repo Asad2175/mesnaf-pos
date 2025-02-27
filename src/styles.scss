@@ -1,1 +1,90 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the theme object.
+$mesnaf-pos-theme: mat.define-theme((
+  color: (
+    theme-type: light,
+    primary: mat.$azure-palette,
+    tertiary: mat.$blue-palette,
+  ),
+  density: (
+    scale: 0,
+  )
+));
+
+@font-face {
+  font-family: 'Droid Arabic Kufi';
+  src: url('/assets/fonts/DroidKufi-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Axiforma';
+  src: url('/assets/fonts/Axiforma-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Digital';
+  src: url('/assets/fonts/DigitalNumbers-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+:root {
+  @include mat.all-component-themes($mesnaf-pos-theme);
+}
+
+// Comment out the line below if you want to use the pre-defined typography utility classes.
+// For more information: https://material.angular.io/guide/typography#using-typography-styles-in-your-application.
+// @include mat.typography-hierarchy($mesnaf-pos-theme);
+
+// Comment out the line below if you want to use the deprecated `color` inputs.
+// @include mat.color-variants-backwards-compatibility($mesnaf-pos-theme);
 /* You can add global styles to this file, and also import other style files */
+
+* {
+  box-sizing: border-box;
+}
+
+html, body { height: 100%; }
+body { margin: 0;}
+
+.arabic-font {
+  font-family: 'Droid Arabic Kufi', sans-serif !important;
+}
+
+.english-font {
+  font-family: 'Axiforma', sans-serif !important;
+}
+
+.number-font {
+  font-family: 'Digital', sans-serif !important;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+
+.purchase-main-section {
+  margin: 50px auto;
+
+  &.mb-0 {
+    margin-bottom: 0;
+  }
+}

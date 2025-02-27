@@ -1,0 +1,14 @@
+<div class="otp-screen">
+  <div class="title english-font english">Enter the code that was sent to your mobile.</div>
+  <div class="title arabic-font arabic">أدخل الرمز الذي تم إرساله إلى هاتفك المحمول.</div>
+</div>
+
+@if(this.otpDetails) {
+<app-otp-input (otp)="getOtpValue($event)" (resend)="generateOtp()" (submit)="verifyOtp()" [timer]="otpDetails.expiryHMSFormat" [error]="error"></app-otp-input>
+}
+
+<div class="back cursor-pointer" (click)="back()">
+  <mat-icon svgIcon="back"></mat-icon>
+  <span class="english-font first">Back to login</span>
+  <span class="arabic-font">العودة إلى تسجيل الدخول </span>
+</div>

@@ -1,0 +1,60 @@
+.otp-inputs {
+    .inputs {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 35px;
+    }
+
+    .timer {
+        margin-top: 35px;
+    }
+
+    .button {
+        margin-top: 30px;
+    }
+
+    .resend {
+        font-size: 14px;
+        line-height: 19px;
+        margin-top: 25px;
+        text-align: center;
+
+        @media(max-width: 500px) {
+            font-size: 13px; 
+        }
+    
+        .label {
+        color: #9BA5B7;
+        }
+        
+        .click {
+            color: #1946A3;
+            text-decoration: underline;
+        }
+    }
+}
+
+::ng-deep {
+    ng-otp-input input {
+        background: #F7F7F7;
+        border: 1px solid #F0F0F0 !important;
+        border-radius: 10px !important;
+        width: 70px !important;
+        height: 73px !important;
+    
+        &:focus-visible {
+            outline: #1946A3 auto 1px;
+        }
+
+        @media (max-width: 992px) {
+            width: 60px !important;
+            height: 63px !important
+        }
+
+        @media (max-width: 500px) {
+            width: 50px !important;
+            height: 53px !important
+        }
+    }
+}

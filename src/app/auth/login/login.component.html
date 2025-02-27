@@ -1,0 +1,37 @@
+<form [formGroup]="loginForm" (ngSubmit)="login()">
+  <div class="main">
+    <div class="top-bar">
+      <div class="mobile-logo">
+        <mat-icon svgIcon="logo" class="mobile-logo"></mat-icon>
+      </div>
+    </div>
+    <div class="header">
+      <div class="arabic" appFontSwitcher>تسجيل الدخول</div>
+      <div class="english" appFontSwitcher>Login</div>
+    </div>
+    <div class="inputs">
+      <div class="username">
+        <app-input [placeholder]="'Username  اسم المستخدم'" formControlName="username" [type]="'text'" [icon]="'username'"></app-input>
+      </div>
+      <div class="password">
+        <app-input [placeholder]="'Password  كلمة المرور'" formControlName="password" [type]="'password'" [icon]="'password'"></app-input>
+      </div>
+    </div>
+    @if(error) {
+    <div class="error">
+      <app-error [message]="error"></app-error>
+    </div>
+    }
+    <div class="forgot-remember">
+      <div class="remember" appFontSwitcher>
+        <mat-checkbox (change)="getCheckbox($event.checked)">
+          <span class="backspace" appFontSwitcher>تذكرنى</span>
+        </mat-checkbox>
+      </div>
+      <div class="forgot" appFontSwitcher>Forgot password?</div>
+    </div>
+    <div class="submit">
+      <app-btn-primary [englishLabel]="'Login'" [arabicLabel]="'تسجيل الدخول'" [inputType]="'submit'"></app-btn-primary>
+    </div>
+  </div>
+</form>

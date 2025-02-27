@@ -1,0 +1,39 @@
+<div class="status-main">
+  <div class="title">
+    <div class="ar" appFontSwitcher>نسخة العميل</div>
+    <div class="en" appFontSwitcher>Customer Copy</div>
+  </div>
+
+  <div class="status">
+    <div class="icon">
+      @if(data.status) {
+      <mat-icon svgIcon="status"></mat-icon>
+      } @else {
+      <mat-icon svgIcon="cancel"></mat-icon>
+      }
+    </div>
+    <div class="text" [ngClass]="data.status ? 'approved' : 'rejected'">
+      <div class="ar" appFontSwitcher>{{ data.message }}</div>
+    </div>
+  </div>
+
+  <div class="amount">
+    <div class="inner">
+      <span class="label" appFontSwitcher>SAR</span>
+      <span class="field" appFontSwitcher>{{ data.amount }}</span>
+    </div>
+  </div>
+
+  <div class="receipt">
+    <div class="ar" appFontSwitcher>هل ترغب في الحصول على إيصال؟</div>
+    <div class="en" appFontSwitcher>Would you like receipt?</div>
+    <div class="buttons">
+      <div>
+        <app-btn-primary [englishLabel]="'Print paper receipt'" [arabicLabel]="'طباعة إيصال ورقي'"></app-btn-primary>
+      </div>
+      <div>
+        <app-btn-primary [englishLabel]="'No Receipt'" [arabicLabel]="'طباعة إيصال ورقي'" type="secondary" (clicked)="goToDashboard()"></app-btn-primary>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,50 @@
+.main-layout {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    .body {
+        margin-top: -50px;
+        flex: 1;
+        background: #fff;
+        border-radius: 40px 40px 0px 0px;
+        padding: 20px;
+
+        @media (max-width: 700px) {
+            border-radius: 20px 20px 0px 0px;
+        }
+
+        .inner {
+            max-width: 1100px;
+            margin: auto;
+        }
+    }
+
+    .footer {
+        .rights {
+            margin-top: 32px;
+            text-align: center;
+            margin-bottom: 32px;
+
+            .arabic {
+                color: #1E293B;
+                font-size: 16px;
+                line-height: 19px;
+            }
+
+            .english {
+                color: #9BA5B7;
+                font-size: 12px;
+                line-height: 19px;
+                margin-top: 7px;
+            }
+        }
+    }
+
+    .bg-shade {
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        z-index: -9;
+    }
+}

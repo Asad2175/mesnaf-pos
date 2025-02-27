@@ -1,0 +1,51 @@
+.main {
+    background: #E9F3FF;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    flex-direction: column;
+    cursor: pointer;
+    position: relative;
+    box-shadow: 0px 3px #ACCDF8;
+    padding: 10px;
+
+    .icon {
+        margin-bottom: 25px;
+
+        mat-icon {
+            height: 48px;
+            width: auto;
+        }
+    }
+    .text {
+        text-align: center;
+        .ar {
+            color: #1E293B;
+            font-size: 18px;
+            line-height: 19px;
+            margin-bottom: 10px;
+
+            @media (max-width: 420px) {
+                font-size: 16px;
+            }
+        }
+
+        .en {
+            color: #475569;
+            font-size: 16px;
+            line-height: 19px;
+
+            @media (max-width: 420px) {
+                font-size: 15px;
+            }
+        }
+    }
+
+    .box-bg {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+    }
+}

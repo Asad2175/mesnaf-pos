@@ -1,0 +1,7 @@
+@if(step === 1) {
+<app-purchase-input (goBack)="back()" (goNext)="next()" [englishTitle]="'Enter purchase transaction#'" [arabicTitle]="'أدخل معاملة الشراء'"></app-purchase-input>
+} @else if(step === 2) {
+<app-amount (goBack)="back()" (goNext)="next()" [englishTitle]="'Please Enter Refund Amount'" [arabicTitle]="'يرجى إدخال مبلغ الاسترداد'"></app-amount>
+}@else if(step === 3) {
+<app-purchase-input (goBack)="back()" (goNext)="next()" [englishTitle]="'Please Enter OTP Which sent to *******152'" [arabicTitle]="'الرجاء إدخال رمز OTP المرسل إلى 331 ******'"></app-purchase-input>
+}

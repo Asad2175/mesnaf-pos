@@ -1,0 +1,43 @@
+.otp-screen {
+    .title {
+        text-align: center;
+        color: #9BA5B7;
+        font-size: 18px;
+        line-height: 19px;
+
+        @media(max-width: 992px) {
+            font-size: 16px;
+        }
+
+        &.arabic {
+            margin-top: 10px;
+        }
+    }
+}
+
+.back {
+    margin-top: 50px;
+    text-align: center;
+    margin-top: 50px;
+    color: #2984FF;
+    font-size: 14px;
+    line-height: 19px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @media(max-width: 500px) {
+        font-size: 13px; 
+        margin-top: 40px;
+    }
+
+    mat-icon {
+        width: 14px;
+        height: auto;
+        margin-right: 12px;
+    }
+
+    .first {
+        margin-right: 8px;
+    }
+}

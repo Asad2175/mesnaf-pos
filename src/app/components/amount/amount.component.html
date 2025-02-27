@@ -1,0 +1,12 @@
+<div class="payment">
+  <div class="title">
+    <div class="ar" appFontSwitcher>{{ arabicTitle }}</div>
+    <div class="en" appFontSwitcher>{{ englishTitle }}</div>
+  </div>
+  <div class="key-section">
+    <div class="input">
+      <input id="input" type="text" [(ngModel)]="input" (input)="getValue()" appDecimalInput />
+    </div>
+    <app-number-keyboard (value)="getInputValue($event)" (validate)="validateForm()" [input]="input"></app-number-keyboard>
+  </div>
+</div>

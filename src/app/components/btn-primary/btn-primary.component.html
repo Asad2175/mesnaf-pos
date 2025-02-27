@@ -1,0 +1,4 @@
+<button [ngClass]="type === 'primary' ? 'primary' : 'secondary'" [type]="inputType" (click)="onClick()">
+  <span appFontSwitcher>{{ englishLabel }}</span>
+  <span class="arb" appFontSwitcher>{{ arabicLabel }}</span>
+</button>

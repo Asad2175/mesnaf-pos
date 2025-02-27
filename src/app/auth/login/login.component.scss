@@ -1,0 +1,156 @@
+.main {
+    margin-top: 50px;
+
+    .top-bar {
+        display: none;
+        margin-bottom: 20px;
+
+        @media(max-width: 700px) {
+            display: flex;
+            justify-content: center;
+
+            .mobile-logo {
+                width: 150px;
+                height: auto;
+            
+                path {
+                    fill: #1946A3;
+                }
+            }
+        }
+    }
+    .header {
+        text-align: center;
+
+        .arabic {
+            font-size: 36px;
+            line-height: 19px;
+            font-weight: 400;
+            color: #1E293B;
+
+            @media(max-width: 992px) {
+                font-size: 33px;
+            }
+
+            @media(max-width: 500px) {
+                font-size: 30px;
+            }
+        }
+
+        .english {
+            font-size: 26px;
+            line-height: 19px;
+            font-weight: 400;
+            color: #9BA5B7;
+            margin-top: 35px;
+
+            @media(max-width: 992px) {
+                font-size: 23px;
+            }
+
+            @media(max-width: 500px) {
+                font-size: 20px;
+                margin-top: 30px;
+            }
+        }
+    }
+
+    .inputs {
+        margin-top: 50px;
+
+        @media (max-width: 992px) {
+            margin-top: 40px;
+        }
+
+        @media (max-width: 500px) {
+            margin-top: 30px;
+        }
+
+        .password {
+            margin-top: 25px;
+        }
+    }
+
+    .error {
+        margin-top: 35px;
+
+        @media (max-width: 992px) {
+            margin-top: 30px;
+        }  
+    }
+
+    .forgot-remember {
+        margin-top: 35px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        @media (max-width: 992px) {
+            margin-top: 30px;
+        }
+
+        .forgot {
+            color: #2984FF;
+            font-size: 14px;
+            line-height: 19px;
+            font-weight: 400;
+            cursor: pointer;
+
+            @media(max-width: 500px) {
+                font-size: 13px;
+            }
+        }
+
+        .backspace {
+            font-size: 14px;
+            
+            @media(max-width: 500px) {
+                font-size: 13px;
+            }
+        }
+    }
+
+    .submit {
+        margin-top: 45px;
+
+        @media (max-width: 992px) {
+            margin-top: 40px;
+        }
+    }
+}
+
+::ng-deep {
+    .mobile-logo {
+        path {
+            fill: #1946A3;
+        }
+    }
+
+    .mat-mdc-checkbox .mdc-checkbox {
+        --mdc-checkbox-state-layer-size: 30;
+        --mdc-checkbox-selected-checkmark-color: white;
+        --mdc-checkbox-selected-icon-color: #1946A3;
+        --mdc-checkbox-unselected-icon-color: #9BA5B7;
+        border-radius: 3px;
+    }
+      
+    .mat-mdc-checkbox .mdc-checkbox__background {
+        border-radius: 3px !important;
+    }
+      
+    .mat-mdc-checkbox:hover .mdc-checkbox__background {
+        background-color: #fff !important;
+        border-color: #9BA5B7 !important;
+        --mdc-checkbox-selected-icon-color: #1946A3;
+    }
+    
+    .mat-mdc-checkbox.mat-mdc-checkbox-checked:hover .mdc-checkbox__background {
+        background-color: rgba(98, 0, 234, 0.2) !important;
+        border-color: #6200ea !important;
+        --mdc-checkbox-selected-icon-color: #1946A3;
+    }
+}
+
+.backspace {
+    margin-left: 10px;
+}
