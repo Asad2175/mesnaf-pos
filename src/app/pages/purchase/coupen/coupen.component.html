@@ -1,21 +1,26 @@
 <app-back (back)="goBack()">
   @if(step === 2) {
   <div class="top-details">
-    <div class="amount" appFontSwitcher>300.00</div>
+    <div class="amount" appFontSwitcher>{{ amount }}</div>
     <div class="coupen-text">
       <div class="ar" appFontSwitcher>مبلغ القسيمة</div>
       <div class="en" appFontSwitcher>:Coupon Amount</div>
     </div>
-    <div class="coupen-title" appFontSwitcher>تفاصيل القسيمة:</div>
   </div>
   }
 </app-back>
 
 <div class="purchase-main-section" [class.mb-0]="step === 4">
   @if(step === 1) {
-  <app-purchase-input (goNext)="validateCoupenNumber($event)" [arabicTitle]="'الرجاء إدخال رقم القسيمة.'" [englishTitle]="'Please Enter the Coupon No.'" [minValue]="8"></app-purchase-input>
+  <app-purchase-input
+    (goNext)="validateCoupenNumber($event)"
+    [arabicTitle]="'الرجاء إدخال رقم القسيمة.'"
+    [englishTitle]="'Please Enter the Coupon No.'"
+    [minValue]="7"
+    [error]="incorrectCoupenError"
+  ></app-purchase-input>
   } @else if(step === 2) {
-  <app-coupen-details (process)="validateCoupenDetails()"></app-coupen-details>
+  <app-coupen-details [items]="listItem" (process)="validateCoupenDetails()"></app-coupen-details>
   } @else if (step === 3) {
   <app-purchase-input
     (goNext)="validatePinCode($event)"
@@ -23,6 +28,17 @@
     [arabicTitle]="'الرجاء إدخال رمز الكوبون البريدي'"
     [minValue]="4"
     [maxValue]="4"
+    [error]="incorrectCoupenError"
+  ></app-purchase-input>
+  } @else if(step === 4) {
+  <app-status [data]="purchaseRes"></app-status>
+  } @else if(step === 5) {
+  <app-purchase-input
+    (goNext)="validateInvoice($event)"
+    [arabicTitle]="'الرجاء إدخال رقم التعريف الشخصي'"
+    [englishTitle]="'Please Enter Inovice Number'"
+    [minValue]="1"
+    [error]="incorrectCoupenError"
   ></app-purchase-input>
   }
 </div>

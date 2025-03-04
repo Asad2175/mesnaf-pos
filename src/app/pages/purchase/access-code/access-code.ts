@@ -1,6 +1,7 @@
 import * as CryptoJS from 'crypto-js';
+import { Encryption } from '../../../helper/encryption';
 
-export class Purchase {
+export class AccessCode {
   private _cardNo: string | null;
   private _picCode: string;
   private _amount: number;
@@ -53,23 +54,11 @@ export class Purchase {
   public toJSON(): JSON {
     return {
       cardNo: this._cardNo,
-      picCode: this.getEncryptionCode(this._picCode),
+      picCode: Encryption.getEncryptionCode(this._picCode),
       amount: this._amount,
       transType: this._transType,
       accessCode: this._accessCode
     } as any as JSON
   }
-
-  private getEncryptionCode(item: string): string {
-    const keyBase64 = "o9szYIOq1rRMiouNhNvaq96lqUvCekxR";
-    const key = CryptoJS.enc.Base64.parse(keyBase64);
-    const srcs = CryptoJS.enc.Utf8.parse(item);  
-    const encrypted = CryptoJS.AES.encrypt(srcs, key, {
-        mode: CryptoJS.mode.ECB,
-        padding: CryptoJS.pad.Pkcs7
-    });
-
-    return encrypted.toString();
-}
 }
   

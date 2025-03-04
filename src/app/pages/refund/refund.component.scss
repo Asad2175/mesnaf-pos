@@ -1,0 +1,59 @@
+.top-details {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    padding-left: 10px;
+
+    @media(max-width: 600px) {
+        gap: 15px;
+    }
+
+    .coupen-text {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        
+        .ar {
+            font-size: 14px;
+            line-height: 19px;
+            color: #1E293B;
+        }
+
+        .en {
+            font-size: 14px;
+            line-height: 19px;
+            color: #9BA5B7;
+        }
+    }
+
+    .coupen-label {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        
+        .ar {
+            font-size: 24px;
+            line-height: 19px;
+            color: #1946A3;
+        }
+
+        .en {
+            font-size: 16px;
+            line-height: 19px;
+            color: #1946A3;
+        }
+    }
+
+    .amount {
+        color: #1E293B;
+        font-size: 30px;
+        font-weight: 600;
+
+        @media(max-width: 600px) {
+            font-size: 25px;
+        }
+    }
+}

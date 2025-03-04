@@ -5,5 +5,12 @@ export const END_POINTS = {
     generateOtp: '/api/v1/branches/sms/otp',
     verifyOtp: '/api/v1/branches/sms/validate',
     machineSync: '/api/v1/branches/pos-machine/merchant-info',
-    accessCode: '/api/v1/purchases/do-purchase'
+    accessCode: '/api/v1/purchases/do-purchase',
+    verifyCoupen: (coupen: number) => {
+        return `/api/v1/feed/consume/step1/${coupen}`
+    },
+    coupen: '/api/v1/feed/consume/final-step',
+    updateInvoice: '/api/v1/purchases/invoice/update',
+    refundStepOne: '/api/v1/refund/step/one',
+    refundStepTwo: '/api/v1/refund/step/final'
 };

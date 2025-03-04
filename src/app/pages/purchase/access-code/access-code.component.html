@@ -9,6 +9,14 @@
   } @else if(step === 3) {
   <app-purchase-input (goNext)="validatePicCode($event)" [arabicTitle]="'أدخل الرمز البريدي'" [englishTitle]="'Enter PIN Code'" [minValue]="4" [maxValue]="4"></app-purchase-input>
   } @else if(step === 4) {
-  <app-status [data]="purchaseRes"></app-status>
+  <app-status [data]="purchaseRes" (goInvoiceScreen)="enterInvoice()"></app-status>
+  } @else if(step === 5) {
+  <app-purchase-input
+    (goNext)="validateInvoice($event)"
+    [arabicTitle]="'الرجاء إدخال رقم التعريف الشخصي'"
+    [englishTitle]="'Please Enter Inovice Number'"
+    [minValue]="1"
+    [error]="incorrectCoupenError"
+  ></app-purchase-input>
   }
 </div>

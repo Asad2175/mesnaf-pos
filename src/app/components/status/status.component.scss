@@ -64,8 +64,10 @@
                 border-radius: 10px;
         
                 .label {
-                    font-size: 16px;
-                    color: #9BA5B7;
+                    mat-icon {
+                        height: 16px;
+                        width: 16px;
+                    }
                 }
         
                 .field {
@@ -76,9 +78,15 @@
         
             }
         }
+
+        .invoice-btn {
+            max-width: 450px;
+            margin: 45px auto 0;
+            width: 100%;
+        }
     
         .receipt {
-            margin-top: 25px;
+            margin-top: 45px;
             text-align: center;
         
             .ar {
@@ -118,5 +126,13 @@
         }
     
     
+    }
+}
+
+::ng-deep {
+    mat-icon {
+        .cls-1 {
+            fill: #9BA5B7;
+        }
     }
 }

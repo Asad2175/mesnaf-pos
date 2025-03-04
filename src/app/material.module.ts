@@ -13,7 +13,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatInputModule,
     MatTableModule,
     MatIconModule,
-    MatCheckboxModule
+    MatCheckboxModule,
   ]
 })
 export class MaterialModule { }

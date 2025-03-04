@@ -25,9 +25,7 @@ export class LoginComponent implements OnInit {
     private readonly loginOverviewService: LoginOverviewService, 
     private readonly localstorage: LocalStorageService,
     private readonly loaderService: LoaderService,
-    private readonly cdr: ChangeDetectorRef) {
-      
-    }
+    private readonly cdr: ChangeDetectorRef) {}
 
   ngOnInit() {
     this.init();
@@ -70,7 +68,7 @@ export class LoginComponent implements OnInit {
   private checkRememberMe() {
     const rememberMe = this.localstorage.get('rememberMe');
     if (!AssertionUtils.isNullOrUndefined(rememberMe)) {
-      const username = this.localstorage.get('username');
+      const username = this.localstorage.get('username') || '';
       this.rememberMe = true;
       this.loginForm.patchValue({
         username: username

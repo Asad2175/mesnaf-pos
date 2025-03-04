@@ -90,6 +90,10 @@ export class AppComponent {
       'notes',
       sanitizer.bypassSecurityTrustResourceUrl('assets/icons/notes.svg')
     );
+    iconRegistry.addSvgIcon(
+      'money',
+      sanitizer.bypassSecurityTrustResourceUrl('assets/icons/money.svg')
+    );
   }
 
   public get getLoader(): boolean {

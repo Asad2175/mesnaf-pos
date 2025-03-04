@@ -1,6 +1,6 @@
-import { Component, Input } from '@angular/core';
-import { PurchaseItem } from '../../pages/purchase/purchaseItem';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { NavigationHelperService } from '../../services/navigation-helper/navigation-helper.service';
+import { Purchase } from '../../pages/purchase/purchaseItem';
 
 @Component({
   selector: 'app-status',
@@ -8,11 +8,18 @@ import { NavigationHelperService } from '../../services/navigation-helper/naviga
   styleUrls: ['./status.component.scss']
 })
 export class StatusComponent {
-  @Input() public data!: PurchaseItem;
-  constructor(private readonly navigationService: NavigationHelperService) { }
+  @Input() public data!: Purchase;
+  @Input() public canShowInvoice = true;
+  @Output() public goInvoiceScreen: EventEmitter<string> = new EventEmitter();
+
+  constructor(private readonly navigationService: NavigationHelperService) {}
 
   public goToDashboard(): void {
     this.navigationService.navigateTo('/');
+  }
+
+  public gotoInvoiceScreen(): void {
+    this.goInvoiceScreen.emit();
   }
 
 }

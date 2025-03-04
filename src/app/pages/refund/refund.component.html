@@ -1,7 +1,42 @@
-@if(step === 1) {
-<app-purchase-input (goBack)="back()" (goNext)="next()" [englishTitle]="'Enter purchase transaction#'" [arabicTitle]="'أدخل معاملة الشراء'"></app-purchase-input>
-} @else if(step === 2) {
-<app-amount (goBack)="back()" (goNext)="next()" [englishTitle]="'Please Enter Refund Amount'" [arabicTitle]="'يرجى إدخال مبلغ الاسترداد'"></app-amount>
-}@else if(step === 3) {
-<app-purchase-input (goBack)="back()" (goNext)="next()" [englishTitle]="'Please Enter OTP Which sent to *******152'" [arabicTitle]="'الرجاء إدخال رمز OTP المرسل إلى 331 ******'"></app-purchase-input>
+@if(step !== 4) {
+<app-back (back)="goBack()">
+  @if(step === 2) {
+  <div class="top-details">
+    <div class="coupen-text">
+      <div class="ar" appFontSwitcher>مبلغ الشراء: {{ verifyStepOne.amount }} ريال سعودي</div>
+      <div class="en" appFontSwitcher>Purchase Amount : {{ verifyStepOne.amount }} SAR</div>
+    </div>
+    <div class="coupen-text">
+      <div class="ar" appFontSwitcher>رقم المعاملة {{ verifyStepOne.transId }}</div>
+      <div class="en" appFontSwitcher>Transaction # {{ verifyStepOne.transId }}</div>
+    </div>
+    <div class="coupen-label">
+      <div class="ar" appFontSwitcher>تفاصيل المعاملة:</div>
+      <div class="en" appFontSwitcher>:Transaction Details</div>
+    </div>
+  </div>
+  }
+</app-back>
 }
+<div class="purchase-main-section" [class.mb-0]="step === 4">
+  @if(step === 1) {
+  <app-purchase-input
+    (goNext)="validateTransactionNo($event)"
+    [error]="errorMessage"
+    [englishTitle]="'Enter purchase transaction#'"
+    [arabicTitle]="'أدخل معاملة الشراء'"
+    [minValue]="5"
+  ></app-purchase-input>
+  } @else if(step === 2) {
+  <app-amount (goNext)="validateAmount($event)" [englishTitle]="'New Purchase'" [arabicTitle]="'شراء جديد'"></app-amount>
+  } @if(step === 3) {
+  <app-purchase-input
+    (goNext)="validateOtp($event)"
+    [englishTitle]="'Please Enter OTP Which sent to ' + maskNumber(verifyStepOne.mobile)"
+    [arabicTitle]="'الرجاء إدخال رمز OTP المرسل إلى ' + maskNumber(verifyStepOne.mobile)"
+    [minValue]="4"
+  ></app-purchase-input>
+  } @else if (step === 4) {
+  <app-status [data]="purchaseRes" [canShowInvoice]="false"></app-status>
+  }
+</div>

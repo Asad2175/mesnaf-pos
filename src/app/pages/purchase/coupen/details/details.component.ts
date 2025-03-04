@@ -1,4 +1,5 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ItemList } from '../item-list';
 
 @Component({
   selector: 'app-coupen-details',
@@ -6,6 +7,8 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
   styleUrls: ['./details.component.scss']
 })
 export class CoupenDetailsComponent implements OnInit {
+  @Input() public amount!: number;
+  @Input() public items!: ItemList[];
   @Output() public process: EventEmitter<void> = new EventEmitter();
 
   constructor() { }

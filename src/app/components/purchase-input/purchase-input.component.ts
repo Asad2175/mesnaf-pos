@@ -10,6 +10,7 @@ export class PurchaseInputComponent implements OnInit {
   @Input() public arabicTitle = '';
   @Input() public minValue?: number;
   @Input() public maxValue?: number;
+  @Input() public error?: string = '';
   @Output() public goNext: EventEmitter<number> = new EventEmitter();
   public input!:number;
 

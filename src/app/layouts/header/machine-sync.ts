@@ -44,7 +44,6 @@ export class MachineSync {
     }
 
     public static fromJSON(response: any): MachineSync {
-
         return new MachineSync(
             response.branchName || '',
             response.merchant.name || '',

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationHelperService } from '../../../services/navigation-helper/navigation-helper.service';
-import { Purchase } from '../purchase';
 import { AccessCodeService } from '../../../services/access-code/access-code.service';
-import { PurchaseItem } from '../purchaseItem';
 import { LoaderService } from '../../../services/loader/loader.service';
+import { AccessCode } from './access-code';
+import { Purchase } from '../purchaseItem';
+import { InvoiceService } from '../../../services/invoice/invoice.service';
 
 @Component({
   selector: 'app-access-code',
@@ -15,10 +16,13 @@ export class AccessCodeComponent implements OnInit {
   private amount!: string;
   private accessCode!: number;
   private picCode!: number;
-  public purchaseRes!: PurchaseItem;
+  public purchaseRes!: Purchase;
+  public incorrectCoupenError: string = '';
+
   public constructor(private readonly accessCodeService: AccessCodeService,
     private readonly navigationHelperService: NavigationHelperService,
-    private readonly loaderService: LoaderService
+    private readonly loaderService: LoaderService,
+    private readonly invoiceService: InvoiceService
   ) { }
 
   public ngOnInit() {
@@ -47,13 +51,17 @@ export class AccessCodeComponent implements OnInit {
     this.submit();
   }
 
+  public enterInvoice(): void {
+    this.step = 5;
+  }
+
   private submit(): void {
     this.loaderService.start();
     this.accessCodeService.save(this.getPurchase())
     .subscribe({
-      next: (res: PurchaseItem) => {
+      next: (res: Purchase) => {
         this.purchaseRes = res;
-        this.step = 4;
+        this.step = 4;  
         this.loaderService.end();
       },
       error: (err) => {
@@ -64,8 +72,24 @@ export class AccessCodeComponent implements OnInit {
     })
   }
 
-  public getPurchase(): Purchase {
-    return new Purchase(
+  public validateInvoice(invoiceNo: number): void {
+    this.incorrectCoupenError = '';
+    this.loaderService.start();
+    this.invoiceService.update(Number(this.purchaseRes.transId), invoiceNo.toString())
+    .subscribe({
+      next: () => {
+        this.navigationHelperService.navigateTo('/');
+        this.loaderService.end();
+      },
+      error: (err) => {
+        this.loaderService.end();
+        this.incorrectCoupenError = err.error.message;
+      }
+    })
+  }
+
+  public getPurchase(): AccessCode {
+    return new AccessCode(
       null,
       this.picCode.toString(),
       parseFloat(this.amount),

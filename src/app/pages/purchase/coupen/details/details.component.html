@@ -1,3 +1,5 @@
+<div class="coupen-title" appFontSwitcher>تفاصيل القسيمة:</div>
+
 <div class="coupen-details">
   <div class="header">
     <div class="item">
@@ -14,9 +16,13 @@
     </div>
   </div>
   <div class="body">
-    <div class="item" appFontSwitcher>02</div>
-    <div class="item" appFontSwitcher>الاسم</div>
-    <div class="item" appFontSwitcher>وصف العنصر</div>
+    @for (item of items; track $index) {
+    <div class="body-inner">
+      <div class="item" appFontSwitcher>{{ item.qty }}</div>
+      <div class="item" appFontSwitcher>{{ item.itemUnit }}</div>
+      <div class="item" appFontSwitcher>{{ item.itemName }}</div>
+    </div>
+    }
   </div>
 </div>
 

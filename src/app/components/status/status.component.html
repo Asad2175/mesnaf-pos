@@ -19,10 +19,18 @@
 
   <div class="amount">
     <div class="inner">
-      <span class="label" appFontSwitcher>SAR</span>
+      <span class="label">
+        <mat-icon svgIcon="money"></mat-icon>
+      </span>
       <span class="field" appFontSwitcher>{{ data.amount }}</span>
     </div>
   </div>
+
+  @if(canShowInvoice && data.status) {
+  <div class="invoice-btn">
+    <app-btn-primary [englishLabel]="'Enter Invoice Number'" [arabicLabel]="'أدخل رقم الفاتورة'" (click)="gotoInvoiceScreen()"></app-btn-primary>
+  </div>
+  }
 
   <div class="receipt">
     <div class="ar" appFontSwitcher>هل ترغب في الحصول على إيصال؟</div>
