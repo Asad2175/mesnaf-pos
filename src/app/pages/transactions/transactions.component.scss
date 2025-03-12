@@ -1,0 +1,179 @@
+.title {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    
+    .ar {
+        font-size: 24px;
+        line-height: 29px;
+        color: #1E293B;
+    }
+
+    .en {
+        font-size: 16px;
+        line-height: 29px;
+        color: #9BA5B7;
+    }
+}
+
+.report {
+    margin-top: 30px;
+
+    .row {
+        border-top: 1px solid #D9D9D9;
+        padding: 30px 0;
+        display: flex;
+
+        &:last-child {
+            border-bottom: 1px solid #D9D9D9;
+        }
+
+        .print-icon {
+            width: 10%;
+            display: flex;
+
+            @media (max-width: 991px) {
+                align-self: center;
+            }
+
+            span {
+                height: 42px;
+                width: 42px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: #EAF3FF;
+                cursor: pointer;
+
+                &.ml-5 {
+                    margin-left: 5px;
+                }
+            }
+        }
+
+        .main {
+            width: 90%;
+            display: flex;
+
+            @media (max-width: 991px) {
+                flex-direction: column;
+            }
+
+            .second {
+                width: 47.5%;
+                display: flex;
+                justify-content: space-between;
+
+                @media (max-width: 991px) {
+                    width: 100%
+                }
+                
+                .amount {
+                    color: #1946A3;
+                    font-weight: 600;
+                    font-size: 14px;
+                    display: flex;
+                    align-items: center;
+                    width: 30%;
+                    justify-content: center;
+                }
+        
+                .date {
+                    color: #9BA5B7;
+                    font-weight: 400;
+                    display: flex;
+                    align-items: center;
+                    font-size: 12px;
+                    width: 30%;
+                    justify-content: center;
+                }
+        
+                .status {
+                    display: flex;
+                    align-items: center;
+                    width: 30%;
+                    justify-content: center;
+
+                    @media (max-width: 500px) {
+                        justify-content: flex-end;
+                    }
+        
+                    .dos {
+                        border-radius: 20px;
+                        font-size: 12px;
+                        padding: 7px 18px;
+                        max-height: 30px;
+
+                        &.approved {
+                            border: 1px solid #32B97C;
+                            background: #E3FCF1;
+                            color: #32B97C;
+                        }
+
+                        &.rejected {
+                            border: 1px solid red;
+                            background: #fce3f1;
+                            color: red;
+                        }
+                    }
+                }
+            }
+    
+            .third { 
+                width: 47.5%;
+                display: flex;
+
+                @media (max-width: 991px) {
+                    width: 100%;
+                    margin-top: 20px;
+                }
+
+                .card-number {
+                    display: flex;
+                    align-items: flex-end;
+                    width: 50%;
+                    justify-content: flex-end;
+
+                    @media(max-width: 991px) {
+                        justify-content: center;
+                    }
+
+                    @media (max-width: 500px) {
+                        flex-direction: column-reverse;
+                    }
+        
+                    .number {
+                        margin-right: 10px;
+                        font-size: 12px;
+                        line-height: 19px;
+                        font-weight: 500;
+                        margin-bottom: 5px;
+
+                        @media (max-width: 500px) {
+                            margin-right: 0;
+                        }
+                    }
+        
+                    .label {
+                        .ar {
+                            font-size: 12px;
+                            line-height: 19px;
+                            color: #475569;
+                            text-align: end;
+                        }
+            
+                        .en {
+                            font-size: 12px;
+                            line-height: 19px;
+                            color: #9BA5B7;
+                            margin-bottom: 5px;
+                        }
+                    }
+                }
+            }
+        }
+                
+    }
+}

@@ -14,7 +14,9 @@ export class ResponseInterceptor implements HttpInterceptor {
           return event;
         },
         error: error => {
-          if (error instanceof HttpErrorResponse && (error.error?.errorCode == '401')) {
+          console.log('error', error);
+          if (error instanceof HttpErrorResponse && (error.status == 401)) {
+            console.log('Hello');
             this.authService.logout();
           }
         },

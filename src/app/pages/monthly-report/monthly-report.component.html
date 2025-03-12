@@ -1,0 +1,74 @@
+<app-back (back)="goBack()">
+  <div class="title">
+    <div class="ar" appFontSwitcher>التقرير الشهري</div>
+    <div class="en" appFontSwitcher>Monthly Report</div>
+  </div>
+</app-back>
+
+@if(monthlyReport) {
+<div class="main-report-header lay">
+  <div class="date">
+    <div class="date-select">
+      <div class="label" appFontSwitcher>إلى</div>
+      <mat-form-field (click)="endDatePicker.open()">
+        <mat-label>Choose a date</mat-label>
+        <input matInput [matDatepicker]="endDatePicker" [(ngModel)]="endDate" (dateChange)="getDate()" />
+        <mat-datepicker-toggle matIconSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #endDatePicker></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div class="date-select">
+      <div class="label" appFontSwitcher>من</div>
+      <mat-form-field (click)="startDatePicker.open()">
+        <mat-label>Choose a date</mat-label>
+        <input matInput [matDatepicker]="startDatePicker" [(ngModel)]="startDate" (dateChange)="getDate()" />
+        <mat-datepicker-toggle matIconSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #startDatePicker></mat-datepicker>
+      </mat-form-field>
+    </div>
+  </div>
+</div>
+
+<div class="list">
+  <div class="list-items lay">
+    <div class="item">
+      <div class="status approved" appFontSwitcher><span class="en" appFontSwitcher>Approved Transaction</span> - <span class="ar" appFontSwitcher>الصفقة المعتمدة</span></div>
+      <div class="details">
+        <div class="one">
+          <div class="title" appFontSwitcher>إجمالي المعاملة</div>
+          <div class="amount" appFontSwitcher>
+            <span class="value">{{ monthlyReport.totalApprovedTrans }}</span
+            >Total transaction
+          </div>
+        </div>
+        <div class="two">
+          <div class="title" appFontSwitcher>إجمالي المبلغ المعتمد</div>
+          <div class="amount" appFontSwitcher>
+            <span class="value">{{ monthlyReport.totalApprovedAmount }} SAR</span>Total approved amount
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="list-items lay">
+    <div class="item">
+      <div class="status rejected" appFontSwitcher><span class="en" appFontSwitcher>Rejected Transaction</span> - <span class="ar" appFontSwitcher>الصفقة المرفوضة</span></div>
+      <div class="details">
+        <div class="one">
+          <div class="title" appFontSwitcher>إجمالي المعاملة</div>
+          <div class="amount" appFontSwitcher>
+            <span class="value">{{ monthlyReport.totalRejectedTrans }}</span
+            >Total Rejected transaction
+          </div>
+        </div>
+        <div class="two">
+          <div class="title" appFontSwitcher>الصفقة المرفوضة</div>
+          <div class="amount" appFontSwitcher>
+            <span class="value">{{ monthlyReport.totalRejectedAmount }} SAR</span>Total Rejected amount
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+}

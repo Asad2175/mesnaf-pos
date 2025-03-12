@@ -1,0 +1,158 @@
+.title {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    
+    .ar {
+        font-size: 24px;
+        line-height: 29px;
+        color: #1E293B;
+    }
+
+    .en {
+        font-size: 16px;
+        line-height: 29px;
+        color: #9BA5B7;
+    }
+}
+
+.main-report-header {
+    margin-top: 30px;
+
+    .date {
+        display: flex;
+        justify-content: flex-end;
+
+        @media(max-width: 700px) {
+            flex-direction: column-reverse;
+            gap: 20px;
+        }
+
+        .date-select {
+            display: flex;
+            flex-direction: row-reverse;
+            align-items: center;
+            margin-left: 50px;
+            width: 50%;
+
+            @media (max-width: 700px) {
+                margin-left: 0;
+                width: 100%;
+            }
+
+            .label {
+                margin-left: 20px;
+                font-size: 14px;
+                color: #1946A3;
+            }
+        }
+    }
+}
+
+.list {
+    .list-items {
+        display: flex;
+        flex-direction: row-reverse;
+        text-align: right;
+        justify-content: center;
+        
+        &.lay {
+            border-top: 0;
+        }
+
+        .item {
+            .status {
+                font-size: 14px;
+
+                @media (max-width: 500px) {
+                    font-size: 12px;
+                }
+
+                &.approved {
+                    color: #32B97C;
+                }
+
+                &.rejected {
+                    color: red;
+                }
+            }
+
+            .details {
+                display: flex;
+                margin-top: 10px;
+
+                .title {
+                    color: #475569;
+                    font-size: 14px;
+                    text-align: right;
+
+                    @media (max-width: 500px) {
+                        font-size: 12px;
+                    }
+                }
+    
+                .amount {
+                    font-size: 14px;
+                    color: #9BA5B7;
+
+                    @media (max-width: 500px) {
+                        font-size: 12px;
+                    }
+
+                    @media(max-width: 400px) {
+                        display: flex;
+                        flex-direction: column-reverse;
+                    }
+                
+                    .value {
+                        margin-right: 15px;
+                        font-size: 15px;
+                        color: #1946A3;
+                        font-weight: 600;
+
+                        @media(max-width: 400px) {
+                            margin-right: 0;
+                            font-size: 14px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+.lay {
+    border-top: 1px solid #D9D9D9;
+    padding: 30px 0;
+    border-bottom: 1px solid #D9D9D9;
+}
+
+.two {
+    margin-left: 40px;
+
+    @media(max-width: 500px) {
+        margin-left: 10px;
+    }
+}
+
+::ng-deep {
+    .mat-mdc-form-field-flex {
+        flex-direction: row-reverse !important;
+    }
+    .mat-mdc-form-field-has-icon-suffix .mat-mdc-text-field-wrapper {
+        background-color: #F7F7F7 !important;
+        border-radius: 50px !important;
+        border: 1px solid #F0F0F0;
+    }
+    .mdc-line-ripple::before, .mdc-line-ripple::after {
+        display: none !important;
+    }
+    .mat-mdc-form-field-subscript-wrapper.mat-mdc-form-field-bottom-align {
+        display: none !important;
+    }
+    mat-form-field {
+        flex: 1;
+    }
+}

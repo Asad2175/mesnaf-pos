@@ -94,6 +94,14 @@ export class AppComponent {
       'money',
       sanitizer.bypassSecurityTrustResourceUrl('assets/icons/money.svg')
     );
+    iconRegistry.addSvgIcon(
+      'print',
+      sanitizer.bypassSecurityTrustResourceUrl('assets/icons/print.svg')
+    );
+    iconRegistry.addSvgIcon(
+      'invoice',
+      sanitizer.bypassSecurityTrustResourceUrl('assets/icons/invoice.svg')
+    );
   }
 
   public get getLoader(): boolean {

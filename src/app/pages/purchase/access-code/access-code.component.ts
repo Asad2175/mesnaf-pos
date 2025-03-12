@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavigationHelperService } from '../../../services/navigation-helper/navigation-helper.service';
 import { AccessCodeService } from '../../../services/access-code/access-code.service';
 import { LoaderService } from '../../../services/loader/loader.service';
@@ -8,10 +8,9 @@ import { InvoiceService } from '../../../services/invoice/invoice.service';
 
 @Component({
   selector: 'app-access-code',
-  templateUrl: './access-code.component.html',
-  styleUrls: ['./access-code.component.scss']
+  templateUrl: './access-code.component.html'
 })
-export class AccessCodeComponent implements OnInit {
+export class AccessCodeComponent {
   public step = 1;
   private amount!: string;
   private accessCode!: number;
@@ -24,9 +23,6 @@ export class AccessCodeComponent implements OnInit {
     private readonly loaderService: LoaderService,
     private readonly invoiceService: InvoiceService
   ) { }
-
-  public ngOnInit() {
-  }
 
   public goBack(): void {
     if (this.step === 1) {

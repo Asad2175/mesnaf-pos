@@ -1,0 +1,60 @@
+<app-back (back)="goBack()">
+  <div class="title">
+    <div class="ar" appFontSwitcher>المعاملات الأخيرة</div>
+    <div class="en" appFontSwitcher>Last Transactions</div>
+  </div>
+</app-back>
+
+@if(step === 1) {
+<div class="report">
+  @for(transaction of transactionsRes; track $index) {
+  <div class="row">
+    <div class="print-icon">
+      <span>
+        <mat-icon svgIcon="print"></mat-icon>
+      </span>
+      <span class="ml-5" (click)="gotoInvoiceScreen(transaction.transId)">
+        <mat-icon svgIcon="invoice"></mat-icon>
+      </span>
+    </div>
+    <div class="main">
+      <div class="second">
+        <div class="amount" appFontSwitcher>{{ transaction.amount }} SAR</div>
+        <div class="date" appFontSwitcher>{{ transaction.approvedRejectedDateTime }}</div>
+        <div class="status">
+          <span class="dos" [class.approved]="transaction.purchaseTransStatus === 'SUCCESS'" [class.rejected]="transaction.purchaseTransStatus !== 'SUCCESS'" appFontSwitcher>{{
+            transaction.purchaseTransStatus
+          }}</span>
+        </div>
+      </div>
+      <div class="third">
+        <div class="card-number">
+          <div class="number" appFontSwitcher>{{ transaction.cardNo }}</div>
+          <div class="label">
+            <div class="ar" appFontSwitcher>رقم البطاقة</div>
+            <div class="en" appFontSwitcher>Card number</div>
+          </div>
+        </div>
+        <div class="card-number">
+          <div class="number" appFontSwitcher>{{ transaction.transId }}</div>
+          <div class="label">
+            <div class="ar" appFontSwitcher>رقم التحويل</div>
+            <div class="en" appFontSwitcher>Transaction number</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  }
+</div>
+} @else if ( step === 2) {
+<div class="purchase-main-section" [class.mb-0]="step === 2">
+  <app-purchase-input
+    (goNext)="validateInvoice($event)"
+    [arabicTitle]="'الرجاء إدخال رقم التعريف الشخصي'"
+    [englishTitle]="'Please Enter Inovice Number'"
+    [minValue]="1"
+    [error]="incorrectCoupenError"
+  ></app-purchase-input>
+</div>
+}

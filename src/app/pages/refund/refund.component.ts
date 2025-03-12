@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavigationHelperService } from '../../services/navigation-helper/navigation-helper.service';
 import { RefundService } from '../../services/refund/refund.service';
 import { LoaderService } from '../../services/loader/loader.service';
@@ -11,7 +11,7 @@ import { Purchase } from '../purchase/purchaseItem';
   templateUrl: './refund.component.html',
   styleUrls: ['./refund.component.scss']
 })
-export class RefundComponent implements OnInit {
+export class RefundComponent {
   public step = 1;
   private transactionNumber!: number;
   private otp!: number;
@@ -24,9 +24,6 @@ export class RefundComponent implements OnInit {
     private readonly refundService: RefundService,
     private readonly loaderService: LoaderService
   ) { }
-
-  ngOnInit() {
-  }
 
   public goBack(): void {
     if (this.step === 1) {
