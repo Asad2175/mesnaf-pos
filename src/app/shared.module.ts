@@ -57,7 +57,7 @@ const MODULES = [
   NgOtpInputModule,
   ReactiveFormsModule,
   MatProgressSpinnerModule,
-  FormsModule
+  FormsModule,
 ]
 
 @NgModule({

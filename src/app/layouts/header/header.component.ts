@@ -12,7 +12,7 @@ import { NavigationHelperService } from '../../services/navigation-helper/naviga
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
-  machineDetails!: MachineSync | null;
+  machineDetails!: MachineSync;
 
   constructor(private readonly localStorage: LocalStorageService,
     private readonly loaderService: LoaderService,
@@ -27,6 +27,9 @@ export class HeaderComponent {
     this.machineSyncService.getMachineSyncDetails().pipe(
       tap((machine: MachineSync) => {
         this.machineDetails = machine;
+        this.localStorage.add('branchName', this.machineDetails.branchName);
+        this.localStorage.add('name', this.machineDetails.name);
+        this.localStorage.add('registrationNo', this.machineDetails.registrationNo);
       }),
       finalize(() => this.loaderService.end())
     ).subscribe();

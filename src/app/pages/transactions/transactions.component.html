@@ -10,7 +10,7 @@
   @for(transaction of transactionsRes; track $index) {
   <div class="row">
     <div class="print-icon">
-      <span>
+      <span (click)="print(transaction)">
         <mat-icon svgIcon="print"></mat-icon>
       </span>
       <span class="ml-5" (click)="gotoInvoiceScreen(transaction.transId)">

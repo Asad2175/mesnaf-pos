@@ -36,19 +36,16 @@
               </div>
             </div>
           </div>
-          <!-- <div class="icon">
-            <mat-icon svgIcon="profile"></mat-icon>
-          </div> -->
         </div>
       </div>
       <div class="click-icons">
-        <div class="icon">
+        <div class="icon" matTooltip="Home" matTooltipPosition="above">
           <mat-icon svgIcon="home" [routerLink]="['/']"></mat-icon>
         </div>
-        <div class="icon">
+        <div class="icon" matTooltip="Sync" matTooltipPosition="above">
           <mat-icon svgIcon="settings" (click)="getMachineSyncDetails()"></mat-icon>
         </div>
-        <div class="icon" (click)="logout()">
+        <div class="icon" (click)="logout()" matTooltip="Sync" matTooltipPosition="above">
           <mat-icon svgIcon="logout"></mat-icon>
         </div>
       </div>

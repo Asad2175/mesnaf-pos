@@ -8,6 +8,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {provideNativeDateAdapter} from '@angular/material/core';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     MatIconModule,
     MatCheckboxModule,
     MatDatepickerModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatTooltipModule
   ],
   providers: [provideNativeDateAdapter()],
 })

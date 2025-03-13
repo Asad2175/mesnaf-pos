@@ -4,6 +4,8 @@ import { TransactionsService } from '../../services/transactions/transactions.se
 import { Transactions } from './transactions';
 import { LoaderService } from '../../services/loader/loader.service';
 import { InvoiceService } from '../../services/invoice/invoice.service';
+import { PrintService } from '../../services/print/print.service';
+import { Print } from '../../services/print/print.interface';
 
 @Component({
   selector: 'app-transactions',
@@ -19,7 +21,8 @@ export class TransactionsComponent implements OnInit {
   constructor(private readonly navigationHelperService: NavigationHelperService,
     private readonly transactionsService: TransactionsService,
     private readonly loaderService: LoaderService,
-    private readonly invoiceService: InvoiceService
+    private readonly invoiceService: InvoiceService,
+    private printService: PrintService
   ) { }
 
   ngOnInit() {
@@ -33,6 +36,18 @@ export class TransactionsComponent implements OnInit {
       this.step--;
     }
     
+  }
+
+  public print(transaction: Transactions): void {
+    const data = {
+      cardNo: transaction.cardNo,
+      purchaseTransId: transaction.transId,
+      purchaseAmount: transaction.amount,
+      purchaseStatus: transaction.purchaseTransStatus
+    } as Print;
+  
+    this.printService.printData(data);
+
   }
 
   public gotoInvoiceScreen(transId: number): void {
