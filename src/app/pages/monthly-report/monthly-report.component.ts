@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { NavigationHelperService } from '../../services/navigation-helper/navigation-helper.service';
 import moment from 'moment';
 import { LoaderService } from '../../services/loader/loader.service';
@@ -17,24 +17,26 @@ export class MonthlyReportComponent implements OnInit {
 
   constructor(private readonly navigationHelperService: NavigationHelperService,
     private readonly loaderService: LoaderService,
-    private readonly monthlyReportService: MonthlyReportService
+    private readonly monthlyReportService: MonthlyReportService,
+    private readonly cdr: ChangeDetectorRef
   ) { }
 
   ngOnInit() {
-    this.getDate();
+    this.getMonthlyReport();
   }
 
   public goBack(): void {
     this.navigationHelperService.navigateTo('/');
   }
 
-  public getDate(): void {
+  public getMonthlyReport(): void {
     const START_DATE = moment(this.startDate).format('YYYY-MM-DD');
     const END_DATE = moment(this.endDate).format('YYYY-MM-DD');
     this.loaderService.start();
     this.monthlyReportService.getMontlyReport(START_DATE, END_DATE).subscribe({
       next: (res: MonthlyReport) => {
         this.monthlyReport = res;
+        this.cdr.detectChanges();
         this.loaderService.end();
       },
       error: (err) => {

@@ -5,6 +5,8 @@ import { LoaderService } from '../../services/loader/loader.service';
 import { RefundOne } from './refundOne';
 import { VerifyRefund } from './verifyRefund';
 import { Purchase } from '../purchase/purchaseItem';
+import { Print } from '../../services/print/print.interface';
+import { PrintService } from '../../services/print/print.service';
 
 @Component({
   selector: 'app-refund',
@@ -22,7 +24,8 @@ export class RefundComponent {
   
   constructor(private readonly navigationHelperService: NavigationHelperService,
     private readonly refundService: RefundService,
-    private readonly loaderService: LoaderService
+    private readonly loaderService: LoaderService,
+    private readonly printService: PrintService
   ) { }
 
   public goBack(): void {
@@ -57,6 +60,23 @@ export class RefundComponent {
     return numStr.slice(-4).padStart(numStr.length, '*');
   }
 
+  public print(): void {
+    console.log('this.purchaseRes', this.purchaseRes);
+
+    const data = {
+      cardNo: this.purchaseRes.cardNo ?? '',
+      purchaseTransId: Number(this.purchaseRes.transId),
+      purchaseAmount: String(this.purchaseRes.amount),
+      purchaseStatus: this.purchaseRes.status ? 'SUCCESS' : 'REJECTED',
+      charityNumber: Number(this.purchaseRes.charityNo),
+      charityName: this.purchaseRes.charityName ?? '',
+      approvedRejectedDateTime: this.purchaseRes.startTransDate,
+  
+    } as Print;
+  
+    this.printService.printData(data);
+  }
+
   private VerifyTransactionId(): void {
     this.errorMessage = '';
     this.loaderService.start();
@@ -74,16 +94,16 @@ export class RefundComponent {
   }
 
   private VerifyRefund(): void {
+    this.errorMessage = '';
     this.loaderService.start();
     this.refundService.refundStepTwo(this.getRefund()).subscribe({
       next: (res: any) => {
-        this.purchaseRes = new Purchase(Number(this.refundAmount), true, res.message, res.data.transId);
+        this.purchaseRes = new Purchase(res.data.amount, res.data.refundTransStatus === 'SUCCESS' ? true : false, res.data.message ?? '', res.data.transId, '', '', res.data.cardNo, res.data.transDateTime);
         this.step++;
         this.loaderService.end();
       }, 
       error: (err) => {
-        this.purchaseRes = new Purchase(Number(this.refundAmount), false, err.error.message, this.transactionNumber.toString());
-        this.step++;
+        this.errorMessage = err.error.message;
         this.loaderService.end();
       }
     })

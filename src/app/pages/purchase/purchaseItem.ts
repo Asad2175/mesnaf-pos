@@ -3,12 +3,20 @@ export class Purchase {
   private _status: boolean;
   private _message: string;
   private _transId: string;
+  private _charityName: string;
+  private _charityNo: string;
+  private _cardNo: string;
+  private _startTransDate: string;
 
-  constructor(amount: number, status: boolean, message: string, transId: string) {
+  constructor(amount: number, status: boolean, message: string, transId: string, charityName: string, charityNo: string, cardNo: string, startTransDate: string) {
     this._amount = amount;
     this._status = status;
     this._message = message;
     this._transId = transId;
+    this._charityName = charityName;
+    this._charityNo = charityNo;
+    this._cardNo = cardNo;
+    this._startTransDate = startTransDate;
   }
 
   get amount(): number {
@@ -43,12 +51,48 @@ export class Purchase {
     this._transId = value;
   }
 
+  get charityName(): string {
+    return this._charityName;
+  }
+
+  set charityName(value: string) {
+    this._charityName = value;
+  }
+
+  get charityNo(): string {
+    return this._charityNo;
+  }
+
+  set charityNo(value: string) {
+    this._charityNo = value;
+  }
+
+  get cardNo(): string {
+    return this._cardNo;
+  }
+
+  set cardNo(value: string) {
+    this._cardNo = value;
+  }
+
+  get startTransDate(): string {
+    return this._startTransDate;
+  }
+
+  set startTransDate(value: string) {
+    this._startTransDate = value;
+  }
+
   public static fromJSON(res: any): Purchase {
     return new Purchase(
       res.amount,
       res.status || '',
       res.message,
-      res.transId || ''
+      res.transId || '',
+      res.charityName,
+      res.charityNo,
+      res.cardNo,
+      res.startTransDate
     )
   }
 }

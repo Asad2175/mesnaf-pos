@@ -1,8 +1,9 @@
 export interface Print {
-    charityName?: string,
-    charityNumber?: number,
-    cardNo?: string
+    charityName: string,
+    charityNumber: number,
+    cardNo: string
     purchaseAmount: string,
     purchaseStatus: string,
-    purchaseTransId: number
+    purchaseTransId: number,
+    approvedRejectedDateTime: string
 }

@@ -12,7 +12,7 @@
       <div class="label" appFontSwitcher>إلى</div>
       <mat-form-field (click)="endDatePicker.open()">
         <mat-label>Choose a date</mat-label>
-        <input matInput [matDatepicker]="endDatePicker" [(ngModel)]="endDate" (dateChange)="getDate()" />
+        <input matInput [matDatepicker]="endDatePicker" [(ngModel)]="endDate" (dateChange)="getMonthlyReport()" />
         <mat-datepicker-toggle matIconSuffix [for]="endDatePicker"></mat-datepicker-toggle>
         <mat-datepicker #endDatePicker></mat-datepicker>
       </mat-form-field>
@@ -21,7 +21,7 @@
       <div class="label" appFontSwitcher>من</div>
       <mat-form-field (click)="startDatePicker.open()">
         <mat-label>Choose a date</mat-label>
-        <input matInput [matDatepicker]="startDatePicker" [(ngModel)]="startDate" (dateChange)="getDate()" />
+        <input matInput [matDatepicker]="startDatePicker" [(ngModel)]="startDate" (dateChange)="getMonthlyReport()" />
         <mat-datepicker-toggle matIconSuffix [for]="startDatePicker"></mat-datepicker-toggle>
         <mat-datepicker #startDatePicker></mat-datepicker>
       </mat-form-field>

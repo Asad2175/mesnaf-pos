@@ -5,6 +5,8 @@ import { LoaderService } from '../../../services/loader/loader.service';
 import { AccessCode } from './access-code';
 import { Purchase } from '../purchaseItem';
 import { InvoiceService } from '../../../services/invoice/invoice.service';
+import { Print } from '../../../services/print/print.interface';
+import { PrintService } from '../../../services/print/print.service';
 
 @Component({
   selector: 'app-access-code',
@@ -21,7 +23,8 @@ export class AccessCodeComponent {
   public constructor(private readonly accessCodeService: AccessCodeService,
     private readonly navigationHelperService: NavigationHelperService,
     private readonly loaderService: LoaderService,
-    private readonly invoiceService: InvoiceService
+    private readonly invoiceService: InvoiceService,
+    private readonly printService: PrintService
   ) { }
 
   public goBack(): void {
@@ -49,6 +52,21 @@ export class AccessCodeComponent {
 
   public enterInvoice(): void {
     this.step = 5;
+  }
+
+  public print(): void {
+    const data = {
+      cardNo: this.purchaseRes.cardNo ?? '',
+      purchaseTransId: Number(this.purchaseRes.transId),
+      purchaseAmount: String(this.purchaseRes.amount),
+      purchaseStatus: this.purchaseRes.status ? 'SUCCESS' : 'REJECTED',
+      charityNumber: Number(this.purchaseRes.charityNo),
+      charityName: this.purchaseRes.charityName ?? '',
+      approvedRejectedDateTime: this.purchaseRes.startTransDate,
+  
+    } as Print;
+  
+    this.printService.printData(data);
   }
 
   private submit(): void {

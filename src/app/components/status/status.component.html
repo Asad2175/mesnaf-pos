@@ -37,7 +37,7 @@
     <div class="en" appFontSwitcher>Would you like receipt?</div>
     <div class="buttons">
       <div>
-        <app-btn-primary [englishLabel]="'Print paper receipt'" [arabicLabel]="'طباعة إيصال ورقي'"></app-btn-primary>
+        <app-btn-primary [englishLabel]="'Print paper receipt'" [arabicLabel]="'طباعة إيصال ورقي'" (clicked)="print()"></app-btn-primary>
       </div>
       <div>
         <app-btn-primary [englishLabel]="'No Receipt'" [arabicLabel]="'طباعة إيصال ورقي'" type="secondary" (clicked)="goToDashboard()"></app-btn-primary>

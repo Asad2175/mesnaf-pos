@@ -34,9 +34,10 @@
     (goNext)="validateOtp($event)"
     [englishTitle]="'Please Enter OTP Which sent to ' + maskNumber(verifyStepOne.mobile)"
     [arabicTitle]="'الرجاء إدخال رمز OTP المرسل إلى ' + maskNumber(verifyStepOne.mobile)"
+    [error]="errorMessage"
     [minValue]="4"
   ></app-purchase-input>
   } @else if (step === 4) {
-  <app-status [data]="purchaseRes" [canShowInvoice]="false"></app-status>
+  <app-status [data]="purchaseRes" [canShowInvoice]="false" (goPrint)="print()"></app-status>
   }
 </div>

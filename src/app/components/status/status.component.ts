@@ -11,6 +11,7 @@ export class StatusComponent {
   @Input() public data!: Purchase;
   @Input() public canShowInvoice = true;
   @Output() public goInvoiceScreen: EventEmitter<string> = new EventEmitter();
+  @Output() public goPrint: EventEmitter<string> = new EventEmitter();
 
   constructor(private readonly navigationService: NavigationHelperService) {}
 
@@ -20,6 +21,10 @@ export class StatusComponent {
 
   public gotoInvoiceScreen(): void {
     this.goInvoiceScreen.emit();
+  }
+
+  public print(): void {
+    this.goPrint.emit();
   }
 
 }

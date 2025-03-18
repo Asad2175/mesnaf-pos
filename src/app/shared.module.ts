@@ -34,7 +34,7 @@ const COMPONENTS = [
   BackComponent,
   PurchaseInputComponent,
   AmountComponent,
-  StatusComponent
+  StatusComponent,
 ];
 
 const DIRECTIVES = [

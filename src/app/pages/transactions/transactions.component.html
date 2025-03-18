@@ -10,10 +10,10 @@
   @for(transaction of transactionsRes; track $index) {
   <div class="row">
     <div class="print-icon">
-      <span (click)="print(transaction)">
+      <span (click)="print(transaction)" matTooltip="Print" matTooltipPosition="above">
         <mat-icon svgIcon="print"></mat-icon>
       </span>
-      <span class="ml-5" (click)="gotoInvoiceScreen(transaction.transId)">
+      <span class="ml-5" matTooltip="Enter Invoice" matTooltipPosition="above" (click)="gotoInvoiceScreen(transaction.transId)">
         <mat-icon svgIcon="invoice"></mat-icon>
       </span>
     </div>

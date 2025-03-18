@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { NavigationHelperService } from '../../services/navigation-helper/navigation-helper.service';
 import { TransactionsService } from '../../services/transactions/transactions.service';
 import { Transactions } from './transactions';
@@ -6,6 +6,7 @@ import { LoaderService } from '../../services/loader/loader.service';
 import { InvoiceService } from '../../services/invoice/invoice.service';
 import { PrintService } from '../../services/print/print.service';
 import { Print } from '../../services/print/print.interface';
+import { PrintNewService } from '../../services/print/print-service-qz-tray';
 
 @Component({
   selector: 'app-transactions',
@@ -13,7 +14,7 @@ import { Print } from '../../services/print/print.interface';
   styleUrls: ['./transactions.component.scss']
 })
 export class TransactionsComponent implements OnInit {
-  public transactionsRes!: Transactions[];
+  public transactionsRes: Transactions[] = [];
   public step = 1;
   public incorrectCoupenError: string = '';
   public transactionId!: number;
@@ -22,7 +23,7 @@ export class TransactionsComponent implements OnInit {
     private readonly transactionsService: TransactionsService,
     private readonly loaderService: LoaderService,
     private readonly invoiceService: InvoiceService,
-    private printService: PrintService
+    private readonly printService: PrintNewService,
   ) { }
 
   ngOnInit() {
@@ -43,11 +44,14 @@ export class TransactionsComponent implements OnInit {
       cardNo: transaction.cardNo,
       purchaseTransId: transaction.transId,
       purchaseAmount: transaction.amount,
-      purchaseStatus: transaction.purchaseTransStatus
+      purchaseStatus: transaction.purchaseTransStatus,
+      charityNumber: transaction.charityNo,
+      charityName: '',
+      approvedRejectedDateTime: transaction.approvedRejectedDateTime,
+  
     } as Print;
   
     this.printService.printData(data);
-
   }
 
   public gotoInvoiceScreen(transId: number): void {
@@ -61,7 +65,7 @@ export class TransactionsComponent implements OnInit {
     this.invoiceService.update(Number(this.transactionId), invoiceNo.toString())
     .subscribe({
       next: () => {
-        this.navigationHelperService.navigateTo('/pos/transactions');
+        this.step = 1;
         this.loaderService.end();
       },
       error: (err) => {

@@ -4,18 +4,30 @@ import { MachineSync } from "../../layouts/header/machine-sync";
 import moment from "moment";
 import { Print } from "./print.interface";
 import * as QRCode from 'qrcode';
+import * as qz from 'qz-tray';
+
+// declare const qz: any;
+
 
 @Injectable({ providedIn: 'root' })
-export class PrintService {
+export class PrintNewService {
   public readonly machineDetails!: MachineSync;
   public qrCodeDataUrl: string = '';
+
   constructor(private readonly localStorage: LocalStorageService) {}
 
-  public async printData(data: Print) {
+  public async printData(data: Print, useSilentPrint: boolean = true) {
+    console.log('Not');
+    if (useSilentPrint) {
+      await this.printSilently(data);
+    } else {
+      await this.printViaIframe(data);
+    }
+  }
+
+  private async printViaIframe(data: Print) {
     this.qrCodeDataUrl = await this.generateQRCode(data.purchaseTransId);
-
     const html = this.buildHtml(data);
-
     const iframe = document.createElement('iframe');
     iframe.style.position = 'fixed';
     iframe.style.left = '-9999px';
@@ -31,10 +43,76 @@ export class PrintService {
       setTimeout(() => {
         iframe.contentWindow?.focus();
         iframe.contentWindow?.print();
-
         setTimeout(() => document.body.removeChild(iframe), 1000);
       }, 100);
     }
+  }
+
+  private async printSilently(data: Print) {
+    try {
+      if (!qz.websocket.isActive()) {
+        await qz.websocket.connect();
+      }
+
+      const printers = await qz.printers.find();
+
+      console.log('printers', printers);
+
+      if (!printers || !printers.length) {
+        console.error('❌ No printers found. Please check printer connection.');
+        return;
+      }
+  
+      const printer = this.localStorage.get('printerName') || 'POS-80';
+      const config = qz.configs.create(printer);
+  
+      const receiptText = await this.buildEscPosReceipt(data);
+      const dataToPrint = [{ type: 'raw', data: receiptText }] as qz.PrintData[];
+  
+      await qz.print(config, dataToPrint);
+      console.log('Silent print sent to printer');
+    } catch (err) {
+      console.error('Silent printing error:', err);
+    }
+  }
+
+  private async buildEscPosReceipt(data: Print): Promise<string> {
+    const branchName = this.localStorage.get('branchName');
+    const name = this.localStorage.get('name');
+    const registrationNo = this.localStorage.get('registrationNo');
+    const date = moment(data.approvedRejectedDateTime).format('YYYY-MM-DD');
+    const time = moment(data.approvedRejectedDateTime).format('HH:mm:ss');
+    const qr = await this.generateQRCode(data.purchaseTransId); // Optional QR printing
+
+    let receipt = '';
+    receipt += '\x1B\x40';
+    receipt += '\x1B\x61\x01';
+    receipt += `${name}\n`;
+    receipt += `${registrationNo}\n`;
+    receipt += `${branchName}\n\n`;
+    receipt += '\x1B\x61\x00';
+    receipt += `Date: ${date}   Time: ${time}\n`;
+
+    receipt += `--------------------------------\n`;
+    receipt += `Purchase:               شراء\n`;
+    if (data.cardNo) {
+      receipt += `Card: ${this.maskNumber(data.cardNo)}\n`;
+    }
+    receipt += `Amount: ${data.purchaseAmount} SAR\n`;
+    receipt += `المبلغ: ${data.purchaseAmount} ريال\n`;
+    receipt += `--------------------------------\n`;
+
+    receipt += `Status: ${data.purchaseStatus === 'SUCCESS' ? 'Approved (مقبولة)' : 'Rejected (مرفوض)'}\n`;
+    if (data.charityName) {
+      receipt += `Charity: ${data.charityName} (${data.charityNumber})\n`;
+    }
+    if (data.purchaseTransId > 0) {
+      receipt += `Transaction ID: ${data.purchaseTransId}\n`;
+    }
+
+    receipt += `\n\n`;
+    receipt += '\x1D\x56\x41'; // Full cut
+    return receipt;
   }
 
   private generateQRCode(transId: number): Promise<string> {
@@ -42,15 +120,14 @@ export class PrintService {
   }
 
   private buildHtml(data: Print): string {
-   const branchName = this.localStorage.get('branchName');
-   const name = this.localStorage.get('name');
-   const registrationNo = this.localStorage.get('registrationNo');
-   const date = moment(data.approvedRejectedDateTime).format('YYYY-MM-DD');
-   const time = moment(data.approvedRejectedDateTime).format('HH:mm:ss');
+    // Your current HTML template (same as before)
+    const branchName = this.localStorage.get('branchName');
+    const name = this.localStorage.get('name');
+    const registrationNo = this.localStorage.get('registrationNo');
+    const date = moment(data.approvedRejectedDateTime).format('YYYY-MM-DD');
+    const time = moment(data.approvedRejectedDateTime).format('HH:mm:ss');
 
-   console.log('data.charityName', data.charityName);
-
-   const content = `
+    const content = `
       <div class="name ar text-center mb-7">${name}</div>
       <div class="registrationNo en text-center mb-7 font-600">${registrationNo}</div>
       <div class="branchName en text-center mb-12 font-600">${branchName}</div>
@@ -78,14 +155,10 @@ export class PrintService {
       <div class="ar text-center">${data.purchaseStatus === 'SUCCESS' ? 'مقبولة' : 'مرفوض'}</div>
       <div class="en text-center font-600 mb-15">${data.purchaseStatus === 'SUCCESS' ? 'Approved' : 'Rejected'}</div>
       ${data.purchaseTransId > 0 ? 
-        `
-          <div class="text-right">
-            <span class="en">${data.purchaseTransId}</span>
-            <span class="ar">رقم العملية</span>
-          </div>
-        `
-      : ''}
-      
+        `<div class="text-right">
+          <span class="en">${data.purchaseTransId}</span>
+          <span class="ar">رقم العملية</span>
+        </div>` : ''}
     `;
 
     return `
@@ -162,4 +235,3 @@ export class PrintService {
     return numStr?.slice(-4).padStart(numStr.length, '*');
   }
 }
-

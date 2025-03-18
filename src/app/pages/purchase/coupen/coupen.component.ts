@@ -7,6 +7,8 @@ import { ItemList } from './item-list';
 import { Purchase } from '../purchaseItem';
 import { Coupen } from './Coupen';
 import { InvoiceService } from '../../../services/invoice/invoice.service';
+import { Print } from '../../../services/print/print.interface';
+import { PrintService } from '../../../services/print/print.service';
 
 @Component({
   selector: 'app-coupen',
@@ -26,8 +28,9 @@ export class CoupenComponent implements OnInit {
   constructor(private readonly navigationHelperService: NavigationHelperService,
     private readonly coupenService: CoupenService,
     private readonly loaderService: LoaderService,
-    private readonly invoiceService: InvoiceService
-  ) { }
+    private readonly invoiceService: InvoiceService,
+    private readonly printService: PrintService
+  ) {}
 
   public goBack(): void {
     if (this.step === 1) {
@@ -68,6 +71,21 @@ export class CoupenComponent implements OnInit {
         this.incorrectCoupenError = err.error.message;
       }
     })
+  }
+
+  public print(): void {
+    const data = {
+      cardNo: this.purchaseRes.cardNo ?? '',
+      purchaseTransId: Number(this.purchaseRes.transId),
+      purchaseAmount: String(this.purchaseRes.amount),
+      purchaseStatus: this.purchaseRes.status ? 'SUCCESS' : 'REJECTED',
+      charityNumber: Number(this.purchaseRes.charityNo),
+      charityName: this.purchaseRes.charityName ?? '',
+      approvedRejectedDateTime: this.purchaseRes.startTransDate,
+  
+    } as Print;
+  
+    this.printService.printData(data);
   }
 
   private verifyCoupenNumber(): void {

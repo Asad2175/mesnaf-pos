@@ -5,13 +5,15 @@ export class Transactions {
   private _amount: string;
   private _purchaseTransStatus: string;
   private _approvedRejectedDateTime: string;
+  private _charityNo: number;
 
-  constructor(transId: number, cardNo: string, amount: string, purchaseTransStatus: string, approvedRejectedDateTime: string) {
+  constructor(transId: number, cardNo: string, amount: string, purchaseTransStatus: string, approvedRejectedDateTime: string, charityNo: number) {
     this._transId = transId;
     this._cardNo = cardNo;
     this._amount = amount;
     this._purchaseTransStatus = purchaseTransStatus;
     this._approvedRejectedDateTime = approvedRejectedDateTime;
+    this._charityNo = charityNo;
   }
 
   get transId(): number {
@@ -53,6 +55,14 @@ export class Transactions {
   set approvedRejectedDateTime(value: string) {
     this._approvedRejectedDateTime = value;
   }
+
+  get charityNo(): number {
+    return this._charityNo;
+  }
+
+  set charityNo(value: number) {
+    this._charityNo = value;
+  }
   
   public static fromJSON(response: any): Transactions {
       return new Transactions(
@@ -61,6 +71,7 @@ export class Transactions {
           response.amount,
           response.purchaseTransStatus,
           response.approvedRejectedDateTime,
+          response.charityNo,
       );
   }
 }
