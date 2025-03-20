@@ -7,11 +7,11 @@
       <div class="en" appFontSwitcher>Purchase Amount : {{ verifyStepOne.amount }} SAR</div>
     </div>
     <div class="coupen-text">
-      <div class="ar" appFontSwitcher>رقم المعاملة {{ verifyStepOne.transId }}</div>
+      <div class="ar" appFontSwitcher>رقم العملية {{ verifyStepOne.transId }}</div>
       <div class="en" appFontSwitcher>Transaction # {{ verifyStepOne.transId }}</div>
     </div>
     <div class="coupen-label">
-      <div class="ar" appFontSwitcher>تفاصيل المعاملة:</div>
+      <div class="ar" appFontSwitcher>تفاصيل العملية:</div>
       <div class="en" appFontSwitcher>:Transaction Details</div>
     </div>
   </div>
@@ -24,11 +24,11 @@
     (goNext)="validateTransactionNo($event)"
     [error]="errorMessage"
     [englishTitle]="'Enter purchase transaction#'"
-    [arabicTitle]="'أدخل معاملة الشراء'"
+    [arabicTitle]="'ادخل رقم عملية الشراء'"
     [minValue]="5"
   ></app-purchase-input>
   } @else if(step === 2) {
-  <app-amount (goNext)="validateAmount($event)" [englishTitle]="'New Purchase'" [arabicTitle]="'شراء جديد'"></app-amount>
+  <app-amount (goNext)="validateAmount($event)" [englishTitle]="'New Purchase'" [arabicTitle]="'ادخل مبلغ الاسترجاع'"></app-amount>
   } @if(step === 3) {
   <app-purchase-input
     (goNext)="validateOtp($event)"

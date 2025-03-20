@@ -5,6 +5,8 @@ import { MachineSyncService } from '../../services/machine-sync/machine-sync.ser
 import { MachineSync } from './machine-sync';
 import { finalize, tap } from 'rxjs';
 import { NavigationHelperService } from '../../services/navigation-helper/navigation-helper.service';
+import { MatDialog } from '@angular/material/dialog';
+import { LogoutModalComponent } from '../../components/logoutModal/logoutModal.component';
 
 @Component({
   selector: 'app-header',
@@ -17,7 +19,8 @@ export class HeaderComponent {
   constructor(private readonly localStorage: LocalStorageService,
     private readonly loaderService: LoaderService,
     private readonly machineSyncService: MachineSyncService,
-    private readonly navigationHelperService: NavigationHelperService
+    private readonly navigationHelperService: NavigationHelperService,
+    private readonly dialog: MatDialog
   ) { 
     this.getMachineSyncDetails();
   }
@@ -33,6 +36,10 @@ export class HeaderComponent {
       }),
       finalize(() => this.loaderService.end())
     ).subscribe();
+  }
+
+  public clickLogout(): void {
+    this.dialog.open(LogoutModalComponent)
   }
 
   public logout(): void {

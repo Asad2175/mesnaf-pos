@@ -5,9 +5,9 @@
   @if(step === 1) {
   <app-amount (goNext)="validateAmount($event)" [englishTitle]="'New Purchase'" [arabicTitle]="'شراء جديد'"></app-amount>
   } @else if(step === 2) {
-  <app-purchase-input (goNext)="validateAccessCode($event)" [arabicTitle]="'أدخل رمز التعريف الشخصي السريع'" [minValue]="6"></app-purchase-input>
+  <app-purchase-input (goNext)="validateAccessCode($event)" [arabicTitle]="'ادخل رقم الحساب او الرمز السري'" [minValue]="6"></app-purchase-input>
   } @else if(step === 3) {
-  <app-purchase-input (goNext)="validatePicCode($event)" [arabicTitle]="'أدخل الرمز البريدي'" [englishTitle]="'Enter PIN Code'" [minValue]="4" [maxValue]="4"></app-purchase-input>
+  <app-purchase-input (goNext)="validatePicCode($event)" [arabicTitle]="'ادخل الرقم السري للبطاقة'" [englishTitle]="'Enter PIN Code'" [minValue]="4" [maxValue]="4"></app-purchase-input>
   } @else if(step === 4) {
   <app-status [data]="purchaseRes" (goInvoiceScreen)="enterInvoice()" (goPrint)="print()"></app-status>
   } @else if(step === 5) {

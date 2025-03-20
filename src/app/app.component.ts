@@ -9,7 +9,7 @@ import { LoaderService } from './services/loader/loader.service';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  public title = 'mesnaf-pos';
+  public title = 'منصة مسناف للربط التقني';
   private svgIconsList: string[] = [
     'logo',
     'username',
