@@ -16,8 +16,8 @@ export class DecimalInputDirective {
   @HostListener('keydown', ['$event'])
   onKeydown(event: KeyboardEvent) {
     const input = this.el.nativeElement as HTMLInputElement;
-    if (event.key === 'Backspace' && input.value === '0.01') {
-      event.preventDefault(); // Prevent deleting below 0.01
+    if (event.key === 'Backspace' && input.value === '0.00') {
+      event.preventDefault();
     }
   }
 }

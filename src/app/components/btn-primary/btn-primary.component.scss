@@ -17,6 +17,12 @@ button {
         background: #FFFFFF;
     }
 
+    &[disabled] {
+        background: #5d5d5d;
+        border: 1px solid #5d5d5d;
+        cursor: no-drop;
+    }
+
     @media(max-width: 992px) {
         padding: 16px 0;
     }

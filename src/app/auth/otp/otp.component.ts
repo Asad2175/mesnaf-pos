@@ -1,12 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NavigationHelperService } from '../../services/navigation-helper/navigation-helper.service';
-import { LoginOverviewService } from '../login/login-overview.service';
-import { AssertionUtils } from '../../helper/assertion-utils';
-import { LocalStorageService } from '../../services/local-storage/local-storage.service';
 import { AuthService } from '../../services/auth/auth.service';
 import { Otp } from './otp.interface';
 import { verifyOtp } from './verify-otp.interface';
 import { LoaderService } from '../../services/loader/loader.service';
+import { LocalStorageService } from '../../services/local-storage/local-storage.service';
 
 @Component({
   selector: 'app-otp',
@@ -15,42 +13,42 @@ import { LoaderService } from '../../services/loader/loader.service';
 })
 export class OtpComponent implements OnInit {
   public userEnteredOtp = '';
-  private branchUserName= '';
   public error = '';
   public otpDetails!: Otp;
+  private branchUserName = '';
+  private navigateToLoginCheck = false;
 
   constructor(private readonly navigationHelperService: NavigationHelperService,
-    private readonly loginOverviewService: LoginOverviewService,
-    private localStorageService: LocalStorageService,
-    private authService: AuthService,
-    private readonly loaderService: LoaderService
+    private readonly authService: AuthService,
+    private readonly loaderService: LoaderService,
+    private readonly localStorage: LocalStorageService
   ) { }
 
-  ngOnInit() {
-    this.getLoginDetails();
+  public ngOnInit(): void {
+    this.branchUserName = this.localStorage.get('username') ?? '';
+    const navEntries = performance.getEntriesByType('navigation') as PerformanceNavigationTiming[];
+    const isPageRefresh = navEntries.length && navEntries[0].type === 'reload';
+    console.log('isPageRefresh', isPageRefresh);
+    console.log('this.navigateToLoginCheck', this.navigateToLoginCheck);
+    if (isPageRefresh && this.navigateToLoginCheck) {
+      this.authService.logout();
+    }
+    this.navigateToLoginCheck = true;
     this.generateOtp();
   }
 
   public back() {
-    this.navigationHelperService.back('/login');
+    this.authService.logout();
   }
 
   public getOtpValue(event: string) {
     this.userEnteredOtp = event;
-  }
-
-  private getLoginDetails(): void {
-    const loginDetails = this.loginOverviewService.getData();
-    if (!AssertionUtils.isNullOrUndefined(loginDetails)) {
-      this.branchUserName = this.loginOverviewService.getUsername();
-    } else {
-      this.navigationHelperService.navigateTo('/login');
-    }
+    this.verifyOtp();
   }
 
   public generateOtp() {
     this.loaderService.start();
-    this.authService.generateOtp(this.branchUserName, this.loginOverviewService.getData().access_token).subscribe({
+    this.authService.generateOtp(this.branchUserName).subscribe({
       next: (res: Otp) => {
         this.otpDetails = res;
         this.loaderService.end();
@@ -63,24 +61,21 @@ export class OtpComponent implements OnInit {
   }
 
   public verifyOtp() {
+    this.navigateToLoginCheck = false;
     this.loaderService.start();
-    if (this.userEnteredOtp !== this.otpDetails.otpNo) {
-      this.error = 'The OTP you entered is incorrect.';
-      this.loaderService.end();
-      return;
-    }
-    this.authService.verifyOtp(this.branchUserName, this.userEnteredOtp, this.loginOverviewService.getData().access_token).subscribe({
+    this.authService.verifyOtp(this.branchUserName, this.userEnteredOtp).subscribe({
       next: (verify: verifyOtp) => {
         if (verify.status) {
-          this.localStorageService.add('access_token', this.loginOverviewService.getData().access_token);
-          this.localStorageService.add('refresh_token', this.loginOverviewService.getData().refresh_token);
+          this.navigateToLoginCheck = false;
           this.navigationHelperService.navigateTo('/pos');
         } else {
+          this.navigateToLoginCheck = true;
           this.error = verify.resultMessage;
         }
         this.loaderService.end();
       }, 
       error: (err) => {
+        this.navigateToLoginCheck = true;
         this.error = err.error.message;
         this.loaderService.end();
       },

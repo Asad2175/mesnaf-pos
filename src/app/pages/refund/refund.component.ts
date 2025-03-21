@@ -28,7 +28,7 @@ export class RefundComponent {
     private readonly printService: PrintService
   ) { }
 
-  public goBack(): void {
+  public goBack(): void { 
     if (this.step === 1) {
       this.navigationHelperService.navigateTo('/');
       return;

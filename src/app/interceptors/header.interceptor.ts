@@ -21,7 +21,7 @@ export class HeaderInterceptor implements HttpInterceptor {
           'Authorization': END_POINTS.LoginAuth
         }
       })
-    } else if (!request.url.includes('branches/sms/otp') && !request.url.includes('branches/sms/validate')) {
+    } else {
       request = request.clone({
         setHeaders: {
           'Authorization': `Bearer ${this.localStorage.get('access_token')}`,

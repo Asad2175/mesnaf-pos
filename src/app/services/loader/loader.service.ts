@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -6,17 +7,22 @@ import { Injectable } from '@angular/core';
 export class LoaderService {
 
 constructor() { }
-  private loading = false;
+private loadingSubject = new BehaviorSubject<boolean>(false);
+private loaderTimer: any;
 
   public start(): void {
-    this.loading = true;
+    clearTimeout(this.loaderTimer);
+    this.loaderTimer = setTimeout(() => {
+      this.loadingSubject.next(true);
+    }, 0);
   }
 
   public end(): void {
-    this.loading = false;
+    clearTimeout(this.loaderTimer);
+    this.loadingSubject.next(false);
   }
 
-  public getLoader(): boolean {
-    return this.loading;
+  public getLoader(): Observable<boolean>  {
+    return this.loadingSubject.asObservable();
   }
 }

@@ -1,7 +1,7 @@
 div {
     background: #FFF2F3;
     border-radius: 50px;
-    height: 40px;
+    min-height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -9,6 +9,8 @@ div {
     font-size: 16px;
     color: #E90E1B;
     margin-top: 20px;
+    text-align: center;
+    word-break: break-word;
 
     @media (max-width: 500px) {
         font-size: 13px;

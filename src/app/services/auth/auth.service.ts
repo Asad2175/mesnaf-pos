@@ -9,6 +9,9 @@ import { Login } from '../../auth/login/login.interface';
 import { Otp } from '../../auth/otp/otp.interface';
 import { BaseApiResponse } from '../../helper/base-api.interface';
 import { verifyOtp } from '../../auth/otp/verify-otp.interface';
+import { LoaderService } from '../loader/loader.service';
+import { NavigationHelperService } from '../navigation-helper/navigation-helper.service';
+import { LocalStorageService } from '../local-storage/local-storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +19,10 @@ import { verifyOtp } from '../../auth/otp/verify-otp.interface';
 export class AuthService {
 
 constructor(private readonly httpClient: HttpClient,
-  @Inject(API_URL) private backendUrl: string
+  @Inject(API_URL) private backendUrl: string,
+  private readonly loaderService: LoaderService,
+  private readonly navigationHelperService: NavigationHelperService,
+  private readonly localStorage: LocalStorageService
 ) {}
 
   public login(data: LoginForm): Observable<Login> {
@@ -25,29 +31,34 @@ constructor(private readonly httpClient: HttpClient,
     return this.httpClient.post<Login>(this.backendUrl + END_POINTS.login, formattedData).pipe(map( res => res));
   }
 
-  public generateOtp(branchUsername: string, Authorization: string): Observable<Otp> {
-    return this.httpClient.post<BaseApiResponse<Otp>>(this.backendUrl + END_POINTS.generateOtp, {branchUsername},
-      {headers: new HttpHeaders(
-        {
-          'Authorization': `Bearer ${Authorization}`,
-          'Content-Type': 'application/json'
-        }
-      )}
-    ).pipe(map( res => res.data));
+  public generateOtp(branchUsername: string): Observable<Otp> {
+    return this.httpClient.post<BaseApiResponse<Otp>>(this.backendUrl + END_POINTS.generateOtp, {branchUsername}).pipe(map( res => res.data));
   }
 
-  public verifyOtp(branchUsername: string, reqOTPValue: string, Authorization: string): Observable<verifyOtp> {
-    return this.httpClient.post<BaseApiResponse<verifyOtp>>(this.backendUrl + END_POINTS.verifyOtp, {branchUsername, reqOTPValue},
-      {headers: new HttpHeaders(
-        {
-          'Authorization': `Bearer ${Authorization}`,
-          'Content-Type': 'application/json'
-        }
-      )}
-    ).pipe(map( res => res.data));
+  public verifyOtp(branchUsername: string, reqOTPValue: string): Observable<verifyOtp> {
+    return this.httpClient.post<BaseApiResponse<verifyOtp>>(this.backendUrl + END_POINTS.verifyOtp, {branchUsername, reqOTPValue}).pipe(map( res => res.data));
   }
 
-  public logout(): Observable<void> {
+  public logoutAPI(): Observable<void> {
     return this.httpClient.post<void>(this.backendUrl + END_POINTS.logout, {});
+  }
+
+  public logout(isLogin = true): void {
+    this.loaderService.start();
+    this.logoutAPI().subscribe({
+      next: () => {
+        this.loaderService.end();
+        this.removeLocalStorageData(isLogin);
+        this.navigationHelperService.navigateTo('/');
+      }
+    });
+  }
+
+  private removeLocalStorageData(isLogin: boolean): void {
+    if (isLogin) {
+      this.localStorage.remove('access_token', 'refresh_token');
+    } else {
+      this.localStorage.remove('access_token', 'refresh_token', 'loginDetails', 'machineDetails', 'name', 'registrationNo', 'branchName');
+    }
   }
 }

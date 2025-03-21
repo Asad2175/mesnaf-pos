@@ -10,6 +10,7 @@ export class BtnPrimaryComponent {
   @Input() public arabicLabel: string = '';
   @Input() public type: string = 'primary';
   @Input() public inputType: string = 'button';
+  @Input() public disabled = false; 
   @Output() public clicked: EventEmitter<void> = new EventEmitter();
 
   public onClick() {

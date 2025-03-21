@@ -2,6 +2,7 @@ import {ChangeDetectorRef, Component} from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { LoaderService } from './services/loader/loader.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +11,8 @@ import { LoaderService } from './services/loader/loader.service';
 })
 export class AppComponent {
   public title = 'منصة مسناف للربط التقني';
+  public isLoading$?: Observable<boolean>;
+
   private svgIconsList: string[] = [
     'logo',
     'username',
@@ -40,14 +43,11 @@ export class AppComponent {
     private readonly loaderSerivce: LoaderService,
     private readonly cdRef: ChangeDetectorRef) {
       this.svgIconsList.forEach((element: string) => {
+        this.isLoading$ = this.loaderSerivce.getLoader(); // ✔ safer here
         iconRegistry.addSvgIcon(
           element,
           sanitizer.bypassSecurityTrustResourceUrl(`assets/icons/${element}.svg`)
         );
       });
-  }
-
-  public get getLoader(): boolean {
-    return this.loaderSerivce.getLoader();
   }
 }

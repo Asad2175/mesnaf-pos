@@ -6,16 +6,11 @@
     <app-timer [time]="timer" (timeExpired)="timeExpired($event)"></app-timer>
   </div>
   <div class="button">
-    <app-btn-primary [englishLabel]="'Verify'" [arabicLabel]="'التحقق'" (click)="submitOtp()"></app-btn-primary>
+    <app-btn-primary [englishLabel]="'Verify'" [arabicLabel]="'التحقق'" [disabled]="otpNumber.length !== 4" (click)="submitOtp()"></app-btn-primary>
   </div>
   @if (error) {
   <div class="error">
     <app-error [message]="error"></app-error>
-  </div>
-  } @if(isTimeExpired) {
-  <div class="resend english-font">
-    <span class="label">Didn’t Recieve the code. </span>
-    <span class="click cursor-pointer" (click)="resendOtp()">Click to resend</span>
   </div>
   }
 </div>

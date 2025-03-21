@@ -4,7 +4,7 @@
 </div>
 
 @if(this.otpDetails) {
-<app-otp-input (otp)="getOtpValue($event)" (resend)="generateOtp()" (submit)="verifyOtp()" [timer]="otpDetails.expiryHMSFormat" [error]="error"></app-otp-input>
+<app-otp-input (otp)="getOtpValue($event)" (submit)="verifyOtp()" [timer]="otpDetails.expiryHMSFormat" [error]="error"></app-otp-input>
 }
 
 <div class="back cursor-pointer" (click)="back()">

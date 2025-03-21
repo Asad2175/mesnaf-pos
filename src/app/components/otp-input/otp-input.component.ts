@@ -1,5 +1,9 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ExpiryHMSFormat } from '../../helper/expiry-hms.interface';
+import { AuthService } from '../../services/auth/auth.service';
+import { LoaderService } from '../../services/loader/loader.service';
+import { NavigationHelperService } from '../../services/navigation-helper/navigation-helper.service';
+import { LocalStorageService } from '../../services/local-storage/local-storage.service';
 
 @Component({
   selector: 'app-otp-input',
@@ -10,11 +14,17 @@ export class OtpInputComponent {
   @Input() public timer!: ExpiryHMSFormat;
   @Input() public error!: string;
   @Output() public otp: EventEmitter<string> = new EventEmitter();
-  @Output() public resend: EventEmitter<void> = new EventEmitter();
   @Output() public submit: EventEmitter<boolean> = new EventEmitter();
-  public isTimeExpired = false;
+  public otpNumber = '';
+
+  public constructor(private readonly authService: AuthService,
+    private readonly loaderService: LoaderService,
+    private readonly navigationHelperService: NavigationHelperService,
+    private readonly localStorage: LocalStorageService
+  ) {}
 
   public handleOtpChange(otpValue: string) {
+    this.otpNumber = otpValue;
     if (otpValue.length === 4) {
       this.otp.emit(otpValue);
     }
@@ -26,11 +36,11 @@ export class OtpInputComponent {
 
   public timeExpired(event: boolean) {
     if (event) {
-      this.isTimeExpired = true;
+      this.logout();
     }
   }
 
-  public resendOtp(): void {
-    this.resend.emit();
+  public logout(): void {
+    this.authService.logout()
   }
 }

@@ -1,5 +1,4 @@
 import { Encryption } from "../../../helper/encryption";
-import * as CryptoJS from 'crypto-js';
 
 export class Coupen {
     private _couponNo: string;

@@ -4,7 +4,6 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { LoginForm } from './login.form';
 import { AuthService } from '../../services/auth/auth.service';
 import { Login } from './login.interface';
-import { LoginOverviewService } from './login-overview.service';
 import { LocalStorageService } from '../../services/local-storage/local-storage.service';
 import { LoaderService } from '../../services/loader/loader.service';
 import { AssertionUtils } from '../../helper/assertion-utils';
@@ -22,12 +21,11 @@ export class LoginComponent implements OnInit {
   constructor(private readonly navigationHelperService: NavigationHelperService, 
     private readonly formBuilder: FormBuilder,
     private readonly authService: AuthService,
-    private readonly loginOverviewService: LoginOverviewService, 
     private readonly localstorage: LocalStorageService,
     private readonly loaderService: LoaderService,
     private readonly cdr: ChangeDetectorRef) {}
 
-  ngOnInit() {
+  public ngOnInit() {
     this.init();
     this.checkRememberMe();
   }
@@ -40,17 +38,10 @@ export class LoginComponent implements OnInit {
     this.loaderService.start();
     this.authService.login(this.loginForm).subscribe({
       next: (res: Login) => {
-        if (this.rememberMe) {
-          this.localstorage.add('loginDetails', this.loginForm.value);
-          this.localstorage.add('rememberMe', this.rememberMe);
-          this.localstorage.add('username', this.loginForm.controls.username.value);
-        } else {
-          if (!AssertionUtils.isNullOrUndefined(this.localstorage.get('rememberMe')) || !this.localstorage.get('rememberMe')) {
-            this.localstorage.remove('rememberMe', 'username');
-          }
-        }
-        this.loginOverviewService.setData(res);
-        this.loginOverviewService.setUsername(this.loginForm.controls.username.value);
+        this.localstorage.add('rememberMe', this.rememberMe);
+        this.localstorage.add('username', this.loginForm.controls.username.value);
+        this.localstorage.add('access_token', res.access_token);
+        this.localstorage.add('refresh_token', res.refresh_token);
         this.loaderService.end();
         this.navigationHelperService.navigateTo('/otp');
       },

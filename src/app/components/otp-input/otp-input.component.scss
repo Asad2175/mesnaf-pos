@@ -13,26 +13,6 @@
     .button {
         margin-top: 30px;
     }
-
-    .resend {
-        font-size: 14px;
-        line-height: 19px;
-        margin-top: 25px;
-        text-align: center;
-
-        @media(max-width: 500px) {
-            font-size: 13px; 
-        }
-    
-        .label {
-        color: #9BA5B7;
-        }
-        
-        .click {
-            color: #1946A3;
-            text-decoration: underline;
-        }
-    }
 }
 
 ::ng-deep {

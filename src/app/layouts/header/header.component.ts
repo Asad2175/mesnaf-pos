@@ -7,6 +7,7 @@ import { finalize, tap } from 'rxjs';
 import { NavigationHelperService } from '../../services/navigation-helper/navigation-helper.service';
 import { MatDialog } from '@angular/material/dialog';
 import { LogoutModalComponent } from '../../components/logoutModal/logoutModal.component';
+import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -20,7 +21,8 @@ export class HeaderComponent {
     private readonly loaderService: LoaderService,
     private readonly machineSyncService: MachineSyncService,
     private readonly navigationHelperService: NavigationHelperService,
-    private readonly dialog: MatDialog
+    private readonly dialog: MatDialog,
+    private readonly authService: AuthService
   ) { 
     this.getMachineSyncDetails();
   }
@@ -43,21 +45,11 @@ export class HeaderComponent {
   }
 
   public logout(): void {
-    this.loaderService.start();
-    this.machineSyncService.getMachineSyncDetails().pipe(
-      tap((machine: MachineSync) => {
-        this.machineDetails = machine;
-        this.removeLocalStorageData();
-      }),
-      finalize(() => {
-        this.loaderService.end();
-        this.navigationHelperService.navigateTo('/');
-      })
-    ).subscribe();
+    this.authService.logout(false);
   }
 
   private removeLocalStorageData(): void {
-    this.localStorage.remove('access_token', 'refresh_token');
+    this.localStorage.remove('access_token', 'refresh_token', 'loginDetails', 'machineDetails', 'name', 'registrationNo', 'branchName');
   }
 
 }
