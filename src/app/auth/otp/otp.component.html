@@ -1,6 +1,6 @@
 <div class="otp-screen">
-  <div class="title english-font english">Enter the code that was sent to your mobile.</div>
-  <div class="title arabic-font arabic">أدخل الرمز الذي تم إرساله إلى هاتفك المحمول.</div>
+  <div class="title english-font english">Enter the code that was sent to your mobile. {{ maskNumber() }}</div>
+  <div class="title arabic-font arabic">أدخل الرمز الذي تم إرساله إلى هاتفك المحمول. {{ maskNumber() }}</div>
 </div>
 
 @if(this.otpDetails) {

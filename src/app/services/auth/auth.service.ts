@@ -56,9 +56,9 @@ constructor(private readonly httpClient: HttpClient,
 
   private removeLocalStorageData(isLogin: boolean): void {
     if (isLogin) {
-      this.localStorage.remove('access_token', 'refresh_token');
+      this.localStorage.remove('access_token', 'refresh_token', 'otp');
     } else {
-      this.localStorage.remove('access_token', 'refresh_token', 'loginDetails', 'machineDetails', 'name', 'registrationNo', 'branchName');
+      this.localStorage.remove('access_token', 'refresh_token', 'loginDetails', 'machineDetails', 'name', 'registrationNo', 'branchName', 'otp');
     }
   }
 }

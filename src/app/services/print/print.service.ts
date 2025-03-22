@@ -18,8 +18,11 @@ export class PrintService {
 
     const iframe = document.createElement('iframe');
     iframe.style.position = 'fixed';
-    iframe.style.left = '-9999px';
-    iframe.style.top = '-9999px';
+    iframe.style.left = '0';
+    iframe.style.top = '0';
+    iframe.style.width = '58mm';
+    iframe.style.height = '1000px';
+    iframe.style.visibility = 'hidden';
     document.body.appendChild(iframe);
 
     const doc = iframe.contentWindow?.document;
@@ -27,6 +30,8 @@ export class PrintService {
       doc.open();
       doc.write(html);
       doc.close();
+
+      console.log(iframe?.contentDocument?.body.innerHTML);
 
       setTimeout(() => {
         iframe.contentWindow?.focus();
@@ -104,24 +109,27 @@ export class PrintService {
                 padding: 10px;
               }
             }
-            @font-face {
-              font-family: 'Droid Arabic Kufi';
-              src: url('/assets/fonts/DroidKufi-Regular.ttf') format('truetype');
-              font-weight: normal;
-              font-style: normal;
+            .print {
+              width: 100%;
             }
-            @font-face {
-              font-family: 'Axiforma';
-              src: url('/assets/fonts/Axiforma-Regular.ttf') format('truetype');
-              font-weight: normal;
-              font-style: normal;
-            }
-            .ar {
-              font-family: 'Droid Arabic Kufi', sans-serif !important;
-            }
-            .en {
-              font-family: 'Axiforma', sans-serif !important;
-            }
+            // @font-face {
+            //   font-family: 'Droid Arabic Kufi';
+            //   src: url('/assets/fonts/DroidKufi-Regular.ttf') format('truetype');
+            //   font-weight: normal;
+            //   font-style: normal;
+            // }
+            // @font-face {
+            //   font-family: 'Axiforma';
+            //   src: url('/assets/fonts/Axiforma-Regular.ttf') format('truetype');
+            //   font-weight: normal;
+            //   font-style: normal;
+            // }
+            // .ar {
+            //   font-family: 'Droid Arabic Kufi', sans-serif !important;
+            // }
+            // .en {
+            //   font-family: 'Axiforma', sans-serif !important;
+            // }
             .text-center {
               text-align: center;
             }
@@ -145,8 +153,8 @@ export class PrintService {
               font-weight: 600;
             }
             .qr-wrapper img {
-              width: 200px;
-              height: 200px;
+              width: 120px;
+              height: 120px;
             }
           </style>
         </head>

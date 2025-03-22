@@ -7,7 +7,7 @@ import { NavigationHelperService } from '../services/navigation-helper/navigatio
 export const loginGuard: CanActivateFn = (route) => {
   const localstorageService = inject(LocalStorageService);
   const router = inject(NavigationHelperService);
-  if(!AssertionUtils.isNullOrUndefined(localstorageService.get('access_token')) && route.url.at(0)?.path !== 'otp') {
+  if(!AssertionUtils.isNullOrUndefined(localstorageService.get('access_token')) && localstorageService.get('otp')?.toString() === '1') {
     router.navigateTo('/pos');
     return false;
   }

@@ -6,7 +6,6 @@ import { LoaderService } from '../../services/loader/loader.service';
 import { InvoiceService } from '../../services/invoice/invoice.service';
 import { PrintService } from '../../services/print/print.service';
 import { Print } from '../../services/print/print.interface';
-import { PrintNewService } from '../../services/print/print-service-qz-tray';
 
 @Component({
   selector: 'app-transactions',
@@ -23,7 +22,7 @@ export class TransactionsComponent implements OnInit {
     private readonly transactionsService: TransactionsService,
     private readonly loaderService: LoaderService,
     private readonly invoiceService: InvoiceService,
-    private readonly printService: PrintNewService,
+    private readonly printService: PrintService,
   ) { }
 
   ngOnInit() {

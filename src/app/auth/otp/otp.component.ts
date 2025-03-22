@@ -26,6 +26,7 @@ export class OtpComponent implements OnInit {
 
   public ngOnInit(): void {
     this.branchUserName = this.localStorage.get('username') ?? '';
+    this.localStorage.add('otp', 0);
     const navEntries = performance.getEntriesByType('navigation') as PerformanceNavigationTiming[];
     const isPageRefresh = navEntries.length && navEntries[0].type === 'reload';
     console.log('isPageRefresh', isPageRefresh);
@@ -39,6 +40,11 @@ export class OtpComponent implements OnInit {
 
   public back() {
     this.authService.logout();
+  }
+
+  public maskNumber(): string {
+    const numStr = this.otpDetails.mobile.toString();
+    return numStr.slice(-4).padStart(numStr.length, '*');
   }
 
   public getOtpValue(event: string) {
@@ -67,6 +73,7 @@ export class OtpComponent implements OnInit {
       next: (verify: verifyOtp) => {
         if (verify.status) {
           this.navigateToLoginCheck = false;
+          this.localStorage.add('otp', 1);
           this.navigationHelperService.navigateTo('/pos');
         } else {
           this.navigateToLoginCheck = true;

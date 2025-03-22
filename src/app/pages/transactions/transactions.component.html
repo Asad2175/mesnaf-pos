@@ -13,9 +13,11 @@
       <span (click)="print(transaction)" matTooltip="Print" matTooltipPosition="above">
         <mat-icon svgIcon="print"></mat-icon>
       </span>
+      @if(transaction.purchaseTransStatus === 'SUCCESS') {
       <span class="ml-5" matTooltip="Enter Invoice" matTooltipPosition="above" (click)="gotoInvoiceScreen(transaction.transId)">
         <mat-icon svgIcon="invoice"></mat-icon>
       </span>
+      }
     </div>
     <div class="main">
       <div class="second">

@@ -1,9 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ExpiryHMSFormat } from '../../helper/expiry-hms.interface';
 import { AuthService } from '../../services/auth/auth.service';
-import { LoaderService } from '../../services/loader/loader.service';
-import { NavigationHelperService } from '../../services/navigation-helper/navigation-helper.service';
-import { LocalStorageService } from '../../services/local-storage/local-storage.service';
 
 @Component({
   selector: 'app-otp-input',
@@ -17,10 +14,7 @@ export class OtpInputComponent {
   @Output() public submit: EventEmitter<boolean> = new EventEmitter();
   public otpNumber = '';
 
-  public constructor(private readonly authService: AuthService,
-    private readonly loaderService: LoaderService,
-    private readonly navigationHelperService: NavigationHelperService,
-    private readonly localStorage: LocalStorageService
+  public constructor(private readonly authService: AuthService
   ) {}
 
   public handleOtpChange(otpValue: string) {
