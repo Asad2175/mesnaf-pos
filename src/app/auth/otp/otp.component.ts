@@ -43,7 +43,7 @@ export class OtpComponent implements OnInit {
   }
 
   public maskNumber(): string {
-    const numStr = this.otpDetails.mobile.toString();
+    const numStr = this.otpDetails?.mobile.toString();
     return numStr.slice(-4).padStart(numStr.length, '*');
   }
 

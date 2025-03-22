@@ -94,6 +94,7 @@ export class PrintService {
     return `
       <html>
         <head>
+          <meta name="viewport" content="width=58mm" />
           <style>
             @media print {
               @page {
@@ -110,24 +111,24 @@ export class PrintService {
             .print {
               width: 100%;
             }
-            // @font-face {
-            //   font-family: 'Droid Arabic Kufi';
-            //   src: url('/assets/fonts/DroidKufi-Regular.ttf') format('truetype');
-            //   font-weight: normal;
-            //   font-style: normal;
-            // }
-            // @font-face {
-            //   font-family: 'Axiforma';
-            //   src: url('/assets/fonts/Axiforma-Regular.ttf') format('truetype');
-            //   font-weight: normal;
-            //   font-style: normal;
-            // }
-            // .ar {
-            //   font-family: 'Droid Arabic Kufi', sans-serif !important;
-            // }
-            // .en {
-            //   font-family: 'Axiforma', sans-serif !important;
-            // }
+            @font-face {
+              font-family: 'Droid Arabic Kufi';
+              src: url('/assets/fonts/DroidKufi-Regular.ttf') format('truetype');
+              font-weight: normal;
+              font-style: normal;
+            }
+            @font-face {
+              font-family: 'Axiforma';
+              src: url('/assets/fonts/Axiforma-Regular.ttf') format('truetype');
+              font-weight: normal;
+              font-style: normal;
+            }
+            .ar {
+              font-family: 'Droid Arabic Kufi', sans-serif !important;
+            }
+            .en {
+              font-family: 'Axiforma', sans-serif !important;
+            }
             .text-center {
               text-align: center;
             }
