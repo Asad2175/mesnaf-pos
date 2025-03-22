@@ -20,7 +20,7 @@ export class PrintService {
     iframe.style.position = 'fixed';
     iframe.style.left = '0';
     iframe.style.top = '0';
-    iframe.style.width = '58mm';
+    iframe.style.width = '80mm';
     iframe.style.height = '1000px';
     iframe.style.visibility = 'hidden';
     document.body.appendChild(iframe);
@@ -30,8 +30,6 @@ export class PrintService {
       doc.open();
       doc.write(html);
       doc.close();
-
-      console.log(iframe?.contentDocument?.body.innerHTML);
 
       setTimeout(() => {
         iframe.contentWindow?.focus();
