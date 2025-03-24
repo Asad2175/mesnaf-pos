@@ -45,13 +45,19 @@ export class PrintService {
   }
 
   private buildHtml(data: Print): string {
+    console.log('data', data);
    const branchName = this.localStorage.get('branchName');
    const name = this.localStorage.get('name');
    const registrationNo = this.localStorage.get('registrationNo');
    const date = moment(data.approvedRejectedDateTime).format('YYYY-MM-DD');
    const time = moment(data.approvedRejectedDateTime).format('HH:mm:ss');
-
-   console.log('data.charityName', data.charityName);
+   const itemsHtml = data?.itemList && data.itemList.map(item => `
+    <div class="flex-between flex-center mb-10 p-5">
+      <div class="ar width-33">${item.qty}</div>
+      <div class="ar text-center width-33">${item.itemUnit}</div>
+      <div class="ar text-right width-33">${item.itemName}</div>
+    </div>
+  `).join('');
 
    const content = `
       <div class="name ar text-center mb-7">${name}</div>
@@ -67,6 +73,16 @@ export class PrintService {
       <div class="qr-wrapper text-center mb-15">
         <img src="${this.qrCodeDataUrl}" alt="QR Code" />
       </div>
+      ${data?.itemList ? `
+        <div class="items-list mb-25 border">
+          <div class="flex-between flex-center p-5 border-bottom">
+            <div class="ar font-600 width-33">الكمية</div>
+            <div class="ar text-center font-600 width-33">الوحدة</div>
+            <div class="ar text-right font-600 width-33">الصنف</div>
+          </div>
+          ${itemsHtml}
+        </div>
+      ` : ''}
       <div class="flex-between mb-7 en font-600">
         <div>Purchase</div>
         <div>شراء</div>
@@ -83,8 +99,11 @@ export class PrintService {
       ${data.purchaseTransId > 0 ? 
         `
           <div class="text-right">
-            <span class="en">${data.purchaseTransId}</span>
             <span class="ar">رقم العملية</span>
+            <span class="en"> ${data.purchaseTransId}</span>
+            ${data.message ? `
+              <span class="ar">(${data.message.trim()})</span>
+            ` : ''}
           </div>
         `
       : ''}
@@ -129,6 +148,15 @@ export class PrintService {
             .en {
               font-family: 'Axiforma', sans-serif !important;
             }
+            .border {
+              border: 1px solid #ddd;
+            }
+            .border-bottom {
+              border-bottom: 1px solid #ddd;
+            }
+            .p-5 {
+              padding: 5px;
+            }
             .text-center {
               text-align: center;
             }
@@ -144,12 +172,22 @@ export class PrintService {
             .mb-15 {
               margin-bottom: 15px;
             }
+            .mb-25 {
+              margin-bottom: 25px;
+            }
             .flex-between {
               display: flex;
               justify-content: space-between;
             }
+            .flex-center {
+              display: flex;
+              align-items: center;
+            }
             .font-600 {
               font-weight: 600;
+            }
+            .width-33 {
+              width: 33%;
             }
             .qr-wrapper img {
               width: 120px;

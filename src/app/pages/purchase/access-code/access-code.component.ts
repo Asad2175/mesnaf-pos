@@ -7,6 +7,7 @@ import { Purchase } from '../purchaseItem';
 import { InvoiceService } from '../../../services/invoice/invoice.service';
 import { Print } from '../../../services/print/print.interface';
 import { PrintService } from '../../../services/print/print.service';
+import { SnackbarService } from '../../../services/snackbar/snackbar.service';
 
 @Component({
   selector: 'app-access-code',
@@ -24,7 +25,8 @@ export class AccessCodeComponent {
     private readonly navigationHelperService: NavigationHelperService,
     private readonly loaderService: LoaderService,
     private readonly invoiceService: InvoiceService,
-    private readonly printService: PrintService
+    private readonly printService: PrintService,
+    private readonly matSnackBar: SnackbarService
   ) { }
 
   public goBack(): void {
@@ -63,7 +65,7 @@ export class AccessCodeComponent {
       charityNumber: Number(this.purchaseRes.charityNo),
       charityName: this.purchaseRes.charityName ?? '',
       approvedRejectedDateTime: this.purchaseRes.startTransDate,
-  
+      message: this.purchaseRes.message
     } as Print;
   
     this.printService.printData(data);
@@ -79,7 +81,7 @@ export class AccessCodeComponent {
         this.loaderService.end();
       },
       error: (err) => {
-        this.purchaseRes = err.error.data;
+        this.purchaseRes = Purchase.fromJSON(err.error.data);
         this.step = 4;
         this.loaderService.end();
       }
@@ -91,8 +93,9 @@ export class AccessCodeComponent {
     this.loaderService.start();
     this.invoiceService.update(Number(this.purchaseRes.transId), invoiceNo.toString())
     .subscribe({
-      next: () => {
+      next: (res: any) => {
         this.navigationHelperService.navigateTo('/');
+        this.matSnackBar.open(res.message);
         this.loaderService.end();
       },
       error: (err) => {
@@ -106,7 +109,7 @@ export class AccessCodeComponent {
     return new AccessCode(
       null,
       this.picCode.toString(),
-      parseFloat(this.amount),
+      parseFloat(this.amount).toFixed(2),
       String(this.accessCode).length === 6 ? 2 : 3,
       String(this.accessCode)
     )

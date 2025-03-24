@@ -1,3 +1,5 @@
+import { ItemList } from "./coupen/item-list";
+
 export class Purchase {
   private _amount: number;
   private _status: boolean;
@@ -7,8 +9,9 @@ export class Purchase {
   private _charityNo: string;
   private _cardNo: string;
   private _startTransDate: string;
+  private _itemList: ItemList[]; 
 
-  constructor(amount: number, status: boolean, message: string, transId: string, charityName: string, charityNo: string, cardNo: string, startTransDate: string) {
+  constructor(amount: number, status: boolean, message: string, transId: string, charityName: string, charityNo: string, cardNo: string, startTransDate: string, itemList?: ItemList[]) {
     this._amount = amount;
     this._status = status;
     this._message = message;
@@ -17,6 +20,7 @@ export class Purchase {
     this._charityNo = charityNo;
     this._cardNo = cardNo;
     this._startTransDate = startTransDate;
+    this._itemList = itemList ?? [];
   }
 
   get amount(): number {
@@ -83,16 +87,25 @@ export class Purchase {
     this._startTransDate = value;
   }
 
+  get itemList(): ItemList[] {
+    return this._itemList;
+}
+
+set itemList(value: ItemList[]) {
+    this._itemList = value;
+}
+
   public static fromJSON(res: any): Purchase {
     return new Purchase(
-      res.amount,
+      res.amount.toFixed(2),
       res.status || '',
       res.message,
       res.transId || '',
       res.charityName,
       res.charityNo,
       res.cardNo,
-      res.startTransDate
+      res.startTransDate,
+      res.itemList ?? []
     )
   }
 }

@@ -6,14 +6,16 @@ export class Transactions {
   private _purchaseTransStatus: string;
   private _approvedRejectedDateTime: string;
   private _charityNo: number;
+  private _failReason: string;
 
-  constructor(transId: number, cardNo: string, amount: string, purchaseTransStatus: string, approvedRejectedDateTime: string, charityNo: number) {
+  constructor(transId: number, cardNo: string, amount: string, purchaseTransStatus: string, approvedRejectedDateTime: string, charityNo: number, failReason: string) {
     this._transId = transId;
     this._cardNo = cardNo;
     this._amount = amount;
     this._purchaseTransStatus = purchaseTransStatus;
     this._approvedRejectedDateTime = approvedRejectedDateTime;
     this._charityNo = charityNo;
+    this._failReason = failReason;
   }
 
   get transId(): number {
@@ -63,15 +65,24 @@ export class Transactions {
   set charityNo(value: number) {
     this._charityNo = value;
   }
+
+  get failReason(): string {
+    return this._failReason;
+  }
+
+  set failReason(value: string) {
+    this._failReason = value;
+  }
   
   public static fromJSON(response: any): Transactions {
       return new Transactions(
           response.transId,
           response.cardNo,
-          response.amount,
+          response.amount.toFixed(2),
           response.purchaseTransStatus,
           response.approvedRejectedDateTime,
           response.charityNo,
+          response.failReason
       );
   }
 }

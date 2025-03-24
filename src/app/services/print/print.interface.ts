@@ -1,3 +1,5 @@
+import { ItemList } from "../../pages/purchase/coupen/item-list"
+
 export interface Print {
     charityName: string,
     charityNumber: number,
@@ -6,4 +8,6 @@ export interface Print {
     purchaseStatus: string,
     purchaseTransId: number,
     approvedRejectedDateTime: string
+    itemList?: ItemList[],
+    message?:string
 }

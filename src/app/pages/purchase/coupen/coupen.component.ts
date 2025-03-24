@@ -2,13 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { NavigationHelperService } from '../../../services/navigation-helper/navigation-helper.service';
 import { CoupenService } from '../../../services/coupen/coupen.service';
 import { LoaderService } from '../../../services/loader/loader.service';
-import { VerifyCoupon } from './verify-coupen';
-import { ItemList } from './item-list';
 import { Purchase } from '../purchaseItem';
 import { Coupen } from './Coupen';
 import { InvoiceService } from '../../../services/invoice/invoice.service';
 import { Print } from '../../../services/print/print.interface';
 import { PrintService } from '../../../services/print/print.service';
+import { SnackbarService } from '../../../services/snackbar/snackbar.service';
 
 @Component({
   selector: 'app-coupen',
@@ -19,17 +18,17 @@ export class CoupenComponent implements OnInit {
   public step = 1;
   public coupenNumber!: number;
   public incorrectCoupenError: string = '';
-  public amount!: number;
   public pincode!: number;
-  public listItem!: ItemList[];
   public purchaseRes!: Purchase;
+  public draftPurchaseRes!: Purchase;
 
 
   constructor(private readonly navigationHelperService: NavigationHelperService,
     private readonly coupenService: CoupenService,
     private readonly loaderService: LoaderService,
     private readonly invoiceService: InvoiceService,
-    private readonly printService: PrintService
+    private readonly printService: PrintService,
+    private readonly matSnackBar: SnackbarService
   ) {}
 
   public goBack(): void {
@@ -62,8 +61,9 @@ export class CoupenComponent implements OnInit {
     this.loaderService.start();
     this.invoiceService.update(Number(this.purchaseRes.transId), invoiceNo.toString())
     .subscribe({
-      next: () => {
+      next: (res: any) => {
         this.navigationHelperService.navigateTo('/');
+        this.matSnackBar.open(res.message);
         this.loaderService.end();
       },
       error: (err) => {
@@ -73,16 +73,22 @@ export class CoupenComponent implements OnInit {
     })
   }
 
-  public print(): void {
+  public gotoInvoiceScreen(): void {
+    this.step = 5;
+  }
+
+  public print(isDraft: boolean): void {
+    const res = isDraft ? this.draftPurchaseRes : this.purchaseRes
     const data = {
-      cardNo: this.purchaseRes.cardNo ?? '',
-      purchaseTransId: Number(this.purchaseRes.transId),
-      purchaseAmount: String(this.purchaseRes.amount),
-      purchaseStatus: this.purchaseRes.status ? 'SUCCESS' : 'REJECTED',
-      charityNumber: Number(this.purchaseRes.charityNo),
-      charityName: this.purchaseRes.charityName ?? '',
-      approvedRejectedDateTime: this.purchaseRes.startTransDate,
-  
+      cardNo: res.cardNo ?? '',
+      purchaseTransId: Number(res.transId),
+      purchaseAmount: String(res.amount),
+      purchaseStatus: res.status ? 'SUCCESS' : 'REJECTED',
+      charityNumber: Number(res.charityNo),
+      charityName: res.charityName ?? '',
+      approvedRejectedDateTime: res.startTransDate,
+      itemList: res.itemList,
+      message: res.message ?? ''
     } as Print;
   
     this.printService.printData(data);
@@ -92,10 +98,8 @@ export class CoupenComponent implements OnInit {
     this.loaderService.start();
     this.incorrectCoupenError = '';
     this.coupenService.verifyCoupen(this.coupenNumber).subscribe({
-      next: (res: VerifyCoupon) => {
-        console.log('res', res);
-        this.amount = res.amount;
-        this.listItem = res.itemList;
+      next: (res: Purchase) => {
+        this.draftPurchaseRes = res;
         this.loaderService.end();
         this.step++;
       },

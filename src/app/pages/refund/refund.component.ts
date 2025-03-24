@@ -98,7 +98,7 @@ export class RefundComponent {
     this.loaderService.start();
     this.refundService.refundStepTwo(this.getRefund()).subscribe({
       next: (res: any) => {
-        this.purchaseRes = new Purchase(res.data.amount, res.data.refundTransStatus === 'SUCCESS' ? true : false, res.data.message ?? '', res.data.transId, '', '', res.data.cardNo, res.data.transDateTime);
+        this.purchaseRes = new Purchase(res.data.amount.toFixed(2), res.data.refundTransStatus === 'SUCCESS' ? true : false, res.data.message ?? '', res.data.transId, '', '', res.data.cardNo, res.data.transDateTime);
         this.step++;
         this.loaderService.end();
       }, 

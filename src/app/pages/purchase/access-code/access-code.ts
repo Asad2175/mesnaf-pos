@@ -1,14 +1,13 @@
-import * as CryptoJS from 'crypto-js';
 import { Encryption } from '../../../helper/encryption';
 
 export class AccessCode {
   private _cardNo: string | null;
   private _picCode: string;
-  private _amount: number;
+  private _amount: string;
   private _transType: number;
   private _accessCode: string;
 
-  constructor(cardNo: string | null, picCode: string, amount: number, transType: number, accessCode: string) {
+  constructor(cardNo: string | null, picCode: string, amount: string, transType: number, accessCode: string) {
     this._cardNo = cardNo;
     this._picCode = picCode;
     this._amount = amount;
@@ -30,10 +29,10 @@ export class AccessCode {
     this._picCode = value;
   }
 
-  public get amount(): number {
+  public get amount(): string {
     return this._amount;
   }
-  public set amount(value: number) {
+  public set amount(value: string) {
     this._amount = value;
   }
 

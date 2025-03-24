@@ -8,11 +8,17 @@ import { ItemList } from '../item-list';
 })
 export class CoupenDetailsComponent {
   @Input() public amount!: number;
+  @Input() public charityName!: string;
   @Input() public items!: ItemList[];
   @Output() public process: EventEmitter<void> = new EventEmitter();
+  @Output() public print: EventEmitter<void> = new EventEmitter();
 
   public processClick(): void {
     this.process.emit();
+  }
+
+  public printClick(): void {
+    this.print.emit();
   }
 
 }

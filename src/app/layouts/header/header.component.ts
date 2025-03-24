@@ -6,7 +6,6 @@ import { MachineSync } from './machine-sync';
 import { finalize, tap } from 'rxjs';
 import { NavigationHelperService } from '../../services/navigation-helper/navigation-helper.service';
 import { MatDialog } from '@angular/material/dialog';
-import { LogoutModalComponent } from '../../components/logoutModal/logoutModal.component';
 import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
@@ -38,10 +37,6 @@ export class HeaderComponent {
       }),
       finalize(() => this.loaderService.end())
     ).subscribe();
-  }
-
-  public clickLogout(): void {
-    this.dialog.open(LogoutModalComponent)
   }
 
   public logout(): void {

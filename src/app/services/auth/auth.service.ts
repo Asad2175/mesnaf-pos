@@ -12,6 +12,7 @@ import { verifyOtp } from '../../auth/otp/verify-otp.interface';
 import { LoaderService } from '../loader/loader.service';
 import { NavigationHelperService } from '../navigation-helper/navigation-helper.service';
 import { LocalStorageService } from '../local-storage/local-storage.service';
+import { SnackbarService } from '../snackbar/snackbar.service';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,8 @@ constructor(private readonly httpClient: HttpClient,
   @Inject(API_URL) private backendUrl: string,
   private readonly loaderService: LoaderService,
   private readonly navigationHelperService: NavigationHelperService,
-  private readonly localStorage: LocalStorageService
+  private readonly localStorage: LocalStorageService,
+  private readonly snackbar: SnackbarService
 ) {}
 
   public login(data: LoginForm): Observable<Login> {
@@ -46,9 +48,10 @@ constructor(private readonly httpClient: HttpClient,
   public logout(isLogin = true): void {
     this.loaderService.start();
     this.logoutAPI().subscribe({
-      next: () => {
+      next: (res: any) => {
         this.loaderService.end();
         this.removeLocalStorageData(isLogin);
+        this.snackbar.open('انتهت الجلسة');
         this.navigationHelperService.navigateTo('/');
       }
     });

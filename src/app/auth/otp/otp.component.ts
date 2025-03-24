@@ -1,10 +1,11 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavigationHelperService } from '../../services/navigation-helper/navigation-helper.service';
 import { AuthService } from '../../services/auth/auth.service';
 import { Otp } from './otp.interface';
 import { verifyOtp } from './verify-otp.interface';
 import { LoaderService } from '../../services/loader/loader.service';
 import { LocalStorageService } from '../../services/local-storage/local-storage.service';
+import { SnackbarService } from '../../services/snackbar/snackbar.service';
 
 @Component({
   selector: 'app-otp',
@@ -21,7 +22,8 @@ export class OtpComponent implements OnInit {
   constructor(private readonly navigationHelperService: NavigationHelperService,
     private readonly authService: AuthService,
     private readonly loaderService: LoaderService,
-    private readonly localStorage: LocalStorageService
+    private readonly localStorage: LocalStorageService,
+    private readonly matSnackBar: SnackbarService
   ) { }
 
   public ngOnInit(): void {
@@ -74,6 +76,7 @@ export class OtpComponent implements OnInit {
         if (verify.status) {
           this.navigateToLoginCheck = false;
           this.localStorage.add('otp', 1);
+          this.matSnackBar.open(verify.resultMessage);
           this.navigationHelperService.navigateTo('/pos');
         } else {
           this.navigateToLoginCheck = true;

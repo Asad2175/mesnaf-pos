@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 import { DecimalFormatService } from '../../services/decimal-formatter/decimal-formatter.service';
 
 @Component({
@@ -14,7 +14,16 @@ export class AmountComponent implements OnInit {
 
   constructor(private readonly decimalService: DecimalFormatService) { }
 
+  @HostListener('document:keydown', ['$event'])
+  handleKeyboardEvent() {
+    this.focus();
+  }
+
   ngOnInit() {
+    this.focus();
+  }
+
+  private focus(): void {
     document.getElementById('input')?.focus();
   }
 

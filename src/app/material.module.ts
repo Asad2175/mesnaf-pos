@@ -10,6 +10,7 @@ import {provideNativeDateAdapter} from '@angular/material/core';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   exports: [
@@ -22,7 +23,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatDatepickerModule,
     MatFormFieldModule,
     MatTooltipModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSnackBarModule
   ],
   providers: [provideNativeDateAdapter()],
 })

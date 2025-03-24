@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-purchase-input',
@@ -14,7 +14,16 @@ export class PurchaseInputComponent implements OnInit {
   @Output() public goNext: EventEmitter<number> = new EventEmitter();
   public input!:number;
 
+  @HostListener('document:keydown', ['$event'])
+  handleKeyboardEvent() {
+    this.focus();
+  }
+
   ngOnInit() {
+    this.focus();
+  }
+
+  private focus(): void {
     document.getElementById('input')?.focus();
   }
 

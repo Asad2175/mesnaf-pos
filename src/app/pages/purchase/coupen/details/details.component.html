@@ -1,3 +1,4 @@
+<div class="charity-name" appFontSwitcher>{{ charityName }}</div>
 <div class="coupen-title" appFontSwitcher>تفاصيل القسيمة:</div>
 
 <div class="coupen-details">
@@ -29,7 +30,7 @@
 <div class="receipt">
   <div class="buttons">
     <div>
-      <app-btn-primary [englishLabel]="'Print Coupon'" [arabicLabel]="'طباعة القسيمة'"></app-btn-primary>
+      <app-btn-primary [englishLabel]="'Print Coupon'" [arabicLabel]="'طباعة القسيمة'" (clicked)="printClick()"></app-btn-primary>
     </div>
     <div>
       <app-btn-primary [englishLabel]="'Process'" [arabicLabel]="'العملية'" type="secondary" (clicked)="processClick()"></app-btn-primary>

@@ -6,6 +6,7 @@ import { LoaderService } from '../../services/loader/loader.service';
 import { InvoiceService } from '../../services/invoice/invoice.service';
 import { PrintService } from '../../services/print/print.service';
 import { Print } from '../../services/print/print.interface';
+import { SnackbarService } from '../../services/snackbar/snackbar.service';
 
 @Component({
   selector: 'app-transactions',
@@ -23,6 +24,7 @@ export class TransactionsComponent implements OnInit {
     private readonly loaderService: LoaderService,
     private readonly invoiceService: InvoiceService,
     private readonly printService: PrintService,
+    private readonly matSnackBar: SnackbarService
   ) { }
 
   ngOnInit() {
@@ -47,7 +49,7 @@ export class TransactionsComponent implements OnInit {
       charityNumber: transaction.charityNo,
       charityName: '',
       approvedRejectedDateTime: transaction.approvedRejectedDateTime,
-  
+      message: transaction.failReason ?? ''
     } as Print;
   
     this.printService.printData(data);
@@ -63,8 +65,9 @@ export class TransactionsComponent implements OnInit {
     this.loaderService.start();
     this.invoiceService.update(Number(this.transactionId), invoiceNo.toString())
     .subscribe({
-      next: () => {
+      next: (res: any) => {
         this.step = 1;
+        this.matSnackBar.open(res.message);
         this.loaderService.end();
       },
       error: (err) => {

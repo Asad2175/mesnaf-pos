@@ -80,6 +80,10 @@ body { margin: 0;}
   cursor: pointer;
 }
 
+.mat-mdc-snack-bar-label, button.mat-mdc-snack-bar-action {
+  direction: rtl;
+  font-family: "Droid Arabic Kufi", sans-serif !important;
+}
 
 .purchase-main-section {
   margin: 50px auto;

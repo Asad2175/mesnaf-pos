@@ -1,10 +1,12 @@
 <app-back (back)="goBack()">
   @if(step === 2) {
   <div class="top-details">
-    <div class="amount" appFontSwitcher>{{ amount }}</div>
     <div class="coupen-text">
-      <div class="ar" appFontSwitcher>مبلغ القسيمة</div>
-      <div class="en" appFontSwitcher>:Coupon Amount</div>
+      <div class="en" appFontSwitcher>Coupon Amount:</div>
+    </div>
+    <div class="amount" appFontSwitcher>{{ draftPurchaseRes.amount }}</div>
+    <div class="coupen-text">
+      <div class="ar">:<span appFontSwitcher>مبلغ القسيمة</span></div>
     </div>
   </div>
   }
@@ -20,7 +22,7 @@
     [error]="incorrectCoupenError"
   ></app-purchase-input>
   } @else if(step === 2) {
-  <app-coupen-details [items]="listItem" (process)="validateCoupenDetails()"></app-coupen-details>
+  <app-coupen-details [items]="draftPurchaseRes.itemList" [charityName]="draftPurchaseRes.charityName" (process)="validateCoupenDetails()" (print)="print(true)"></app-coupen-details>
   } @else if (step === 3) {
   <app-purchase-input
     (goNext)="validatePinCode($event)"
@@ -31,7 +33,7 @@
     [error]="incorrectCoupenError"
   ></app-purchase-input>
   } @else if(step === 4) {
-  <app-status [data]="purchaseRes" (goPrint)="print()"></app-status>
+  <app-status [data]="purchaseRes" (goPrint)="print(false)" (goInvoiceScreen)="gotoInvoiceScreen()"></app-status>
   } @else if(step === 5) {
   <app-purchase-input
     (goNext)="validateInvoice($event)"

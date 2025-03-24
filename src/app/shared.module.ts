@@ -22,6 +22,8 @@ import { AmountComponent } from './components/amount/amount.component';
 import { DecimalInputDirective } from './directives/decimal-input.directive';
 import { DecimalFormatService } from './services/decimal-formatter/decimal-formatter.service';
 import { StatusComponent } from './components/status/status.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import { SnackbarService } from './services/snackbar/snackbar.service';
 
 const COMPONENTS = [
   BtnPrimaryComponent, 
@@ -35,6 +37,7 @@ const COMPONENTS = [
   PurchaseInputComponent,
   AmountComponent,
   StatusComponent,
+  NotFoundComponent
 ];
 
 const DIRECTIVES = [
@@ -47,7 +50,8 @@ const SERVICES = [
   NavigationHelperService,
   AuthService,
   LocalStorageService,
-  DecimalFormatService
+  DecimalFormatService,
+  SnackbarService
 ]
 
 const MODULES = [

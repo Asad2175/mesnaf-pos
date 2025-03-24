@@ -44,7 +44,7 @@ export class RefundOne {
   public static fromJSON(response: any): RefundOne {
     return new RefundOne(
         response.purchaseTransDTO.transId,
-        response.purchaseTransDTO.amount,
+        response.purchaseTransDTO.amount.toFixed(2),
         response.smsOTPResponseDTO.mobile,
         response.smsOTPResponseDTO.expiryHMSFormat
     );
