@@ -31,8 +31,6 @@ export class OtpComponent implements OnInit {
     this.localStorage.add('otp', 0);
     const navEntries = performance.getEntriesByType('navigation') as PerformanceNavigationTiming[];
     const isPageRefresh = navEntries.length && navEntries[0].type === 'reload';
-    console.log('isPageRefresh', isPageRefresh);
-    console.log('this.navigateToLoginCheck', this.navigateToLoginCheck);
     if (isPageRefresh && this.navigateToLoginCheck) {
       this.authService.logout();
     }

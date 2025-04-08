@@ -1,14 +1,18 @@
 <div class="otp-screen">
-  <div class="title english-font english">Enter the code that was sent to your mobile. {{ maskNumber() }}</div>
-  <div class="title arabic-font arabic">أدخل الرمز الذي تم إرساله إلى هاتفك المحمول. {{ maskNumber() }}</div>
-</div>
+  <div class="title arabic">
+    <div appFontSwitcher>أدخل الرمز المرسل الى الجوال</div>
+    <div appFontSwitcher>{{ maskNumber() }}</div>
+  </div>
 
-@if(this.otpDetails) {
-<app-otp-input (otp)="getOtpValue($event)" (submit)="verifyOtp()" [timer]="otpDetails.expiryHMSFormat" [error]="error"></app-otp-input>
-}
+  <div class="title english" appFontSwitcher>Enter the code that was sent to your mobile. {{ maskNumber() }}</div>
 
-<div class="back cursor-pointer" (click)="back()">
-  <mat-icon svgIcon="back"></mat-icon>
-  <span class="english-font first">Back to login</span>
-  <span class="arabic-font">العودة إلى تسجيل الدخول </span>
+  @if(this.otpDetails) {
+  <app-otp-input (otp)="getOtpValue($event)" (submit)="verifyOtp()" [timer]="otpDetails.expiryHMSFormat" [error]="error"></app-otp-input>
+  }
+
+  <div class="back cursor-pointer" (click)="back()">
+    <mat-icon svgIcon="back"></mat-icon>
+    <span class="first" appFontSwitcher>Back to login</span>
+    <span appFontSwitcher>العودة إلى تسجيل الدخول </span>
+  </div>
 </div>

@@ -16,7 +16,7 @@ export class CoupenService {
     @Inject(API_URL) private backendUrl: string
   ) {}
 
-  public verifyCoupen(coupen: number): Observable<Purchase> {
+  public verifyCoupen(coupen: string): Observable<Purchase> {
     return this.httpClient.get<BaseApiResponse<Purchase>>(this.backendUrl + END_POINTS.verifyCoupen(coupen)).pipe(map( (res: any) => Purchase.fromJSON(res.data)));
   }
 

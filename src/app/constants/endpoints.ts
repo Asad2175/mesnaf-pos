@@ -6,7 +6,7 @@ export const END_POINTS = {
     verifyOtp: '/api/v1/branches/sms/validate',
     machineSync: '/api/v1/branches/pos-machine/merchant-info',
     accessCode: '/api/v1/purchases/do-purchase',
-    verifyCoupen: (coupen: number) => {
+    verifyCoupen: (coupen: string) => {
         return `/api/v1/feed/consume/step1/${coupen}`
     },
     coupen: '/api/v1/feed/consume/final-step',

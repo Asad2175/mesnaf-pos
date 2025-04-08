@@ -8,13 +8,23 @@
   </div>
   <div class="key-section">
     <div class="input">
-      <input id="input" type="number" [(ngModel)]="input" />
+      @if (type === 'number') {
+      <input id="input" [type]="'number'" [(ngModel)]="input" />
+      } @else {
+      <input id="input" [type]="'string'" [(ngModel)]="inputString" />
+      }
     </div>
     @if(error) {
     <div class="error">
       <app-error [message]="error"></app-error>
     </div>
     }
-    <app-number-keyboard (value)="getInputValue($event)" (validate)="validateForm()" [min]="minValue" [max]="maxValue" [input]="input"></app-number-keyboard>
+    <app-number-keyboard
+      (value)="getInputValue($event)"
+      (validate)="type === 'number' ? validateForm() : validateStringForm()"
+      [min]="minValue"
+      [max]="maxValue"
+      [input]="type === 'number' ? input : inputString"
+    ></app-number-keyboard>
   </div>
 </div>

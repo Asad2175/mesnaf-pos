@@ -15,11 +15,12 @@
 <div class="purchase-main-section" [class.mb-0]="step === 4">
   @if(step === 1) {
   <app-purchase-input
-    (goNext)="validateCoupenNumber($event)"
-    [arabicTitle]="'الرجاء إدخال رقم القسيمة.'"
+    (goNextString)="validateCoupenNumber($event)"
+    [arabicTitle]="'الرجاء إدخال رقم القسيمة'"
     [englishTitle]="'Please Enter the Coupon No.'"
     [minValue]="7"
     [error]="incorrectCoupenError"
+    [type]="'text'"
   ></app-purchase-input>
   } @else if(step === 2) {
   <app-coupen-details [items]="draftPurchaseRes.itemList" [charityName]="draftPurchaseRes.charityName" (process)="validateCoupenDetails()" (print)="print(true)"></app-coupen-details>
@@ -37,7 +38,7 @@
   } @else if(step === 5) {
   <app-purchase-input
     (goNext)="validateInvoice($event)"
-    [arabicTitle]="'الرجاء إدخال رقم التعريف الشخصي'"
+    [arabicTitle]="'ادخل رقم الفاتورة'"
     [englishTitle]="'Please Enter Inovice Number'"
     [minValue]="1"
     [error]="incorrectCoupenError"

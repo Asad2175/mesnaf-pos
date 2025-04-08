@@ -1,8 +1,10 @@
 <app-back (back)="goBack()">
+  @if (step === 1) {
   <div class="title">
-    <div class="ar" appFontSwitcher>المعاملات الأخيرة</div>
+    <div class="ar" appFontSwitcher>اخر العمليات</div>
     <div class="en" appFontSwitcher>Last Transactions</div>
   </div>
+  }
 </app-back>
 
 @if(step === 1) {
@@ -10,11 +12,11 @@
   @for(transaction of transactionsRes; track $index) {
   <div class="row">
     <div class="print-icon">
-      <span (click)="print(transaction)" matTooltip="Print" matTooltipPosition="above">
+      <span (click)="print(transaction)" matTooltip="طباعة" matTooltipPosition="above">
         <mat-icon svgIcon="print"></mat-icon>
       </span>
       @if(transaction.purchaseTransStatus === 'SUCCESS') {
-      <span class="ml-5" matTooltip="Enter Invoice" matTooltipPosition="above" (click)="gotoInvoiceScreen(transaction.transId)">
+      <span class="ml-5" matTooltip="ادخال رقم الفاتورة" matTooltipPosition="above" (click)="gotoInvoiceScreen(transaction.transId)">
         <mat-icon svgIcon="invoice"></mat-icon>
       </span>
       }
@@ -40,7 +42,7 @@
         <div class="card-number">
           <div class="number" appFontSwitcher>{{ transaction.transId }}</div>
           <div class="label">
-            <div class="ar" appFontSwitcher>رقم التحويل</div>
+            <div class="ar" appFontSwitcher>رقم العملية</div>
             <div class="en" appFontSwitcher>Transaction number</div>
           </div>
         </div>
@@ -53,7 +55,7 @@
 <div class="purchase-main-section" [class.mb-0]="step === 2">
   <app-purchase-input
     (goNext)="validateInvoice($event)"
-    [arabicTitle]="'الرجاء إدخال رقم التعريف الشخصي'"
+    [arabicTitle]="'ادخل رقم الفاتورة'"
     [englishTitle]="'Please Enter Inovice Number'"
     [minValue]="1"
     [error]="incorrectCoupenError"

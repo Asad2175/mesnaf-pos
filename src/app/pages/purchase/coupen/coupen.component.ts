@@ -16,7 +16,7 @@ import { SnackbarService } from '../../../services/snackbar/snackbar.service';
 })
 export class CoupenComponent implements OnInit {
   public step = 1;
-  public coupenNumber!: number;
+  public coupenNumber!: string;
   public incorrectCoupenError: string = '';
   public pincode!: number;
   public purchaseRes!: Purchase;
@@ -39,7 +39,7 @@ export class CoupenComponent implements OnInit {
     this.step--;
   }
 
-  public validateCoupenNumber(value: number): void {
+  public validateCoupenNumber(value: string): void {
     this.coupenNumber = value;
     this.verifyCoupenNumber();
   }
@@ -97,6 +97,7 @@ export class CoupenComponent implements OnInit {
   private verifyCoupenNumber(): void {
     this.loaderService.start();
     this.incorrectCoupenError = '';
+
     this.coupenService.verifyCoupen(this.coupenNumber).subscribe({
       next: (res: Purchase) => {
         this.draftPurchaseRes = res;

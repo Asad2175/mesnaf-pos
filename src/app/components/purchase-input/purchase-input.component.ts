@@ -11,8 +11,11 @@ export class PurchaseInputComponent implements OnInit {
   @Input() public minValue?: number;
   @Input() public maxValue?: number;
   @Input() public error?: string = '';
+  @Input() public type?: string = 'number';
   @Output() public goNext: EventEmitter<number> = new EventEmitter();
+  @Output() public goNextString: EventEmitter<string> = new EventEmitter();
   public input!:number;
+  public inputString!:string;
 
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent() {
@@ -28,10 +31,19 @@ export class PurchaseInputComponent implements OnInit {
   }
 
   public getInputValue(event: number | string): void {
-    this.input = Number(event);
+    if (this.type === 'number') {
+      this.input = Number(event);
+    } else {
+      this.inputString = String(event);
+    }
   }
 
   public validateForm(): void{
     this.goNext.emit(this.input);
+  }
+
+  
+  public validateStringForm(): void{
+    this.goNextString.emit(this.inputString);
   }
 }

@@ -11,7 +11,7 @@
     <div class="date-select">
       <div class="label" appFontSwitcher>إلى</div>
       <mat-form-field (click)="endDatePicker.open()">
-        <mat-label>Choose a date</mat-label>
+        <mat-label>من تاريخ </mat-label>
         <input matInput [matDatepicker]="endDatePicker" [(ngModel)]="endDate" (dateChange)="getMonthlyReport()" />
         <mat-datepicker-toggle matIconSuffix [for]="endDatePicker"></mat-datepicker-toggle>
         <mat-datepicker #endDatePicker></mat-datepicker>
@@ -20,7 +20,7 @@
     <div class="date-select">
       <div class="label" appFontSwitcher>من</div>
       <mat-form-field (click)="startDatePicker.open()">
-        <mat-label>Choose a date</mat-label>
+        <mat-label>الى تاريخ</mat-label>
         <input matInput [matDatepicker]="startDatePicker" [(ngModel)]="startDate" (dateChange)="getMonthlyReport()" />
         <mat-datepicker-toggle matIconSuffix [for]="startDatePicker"></mat-datepicker-toggle>
         <mat-datepicker #startDatePicker></mat-datepicker>
@@ -32,7 +32,7 @@
 <div class="list">
   <div class="list-items lay">
     <div class="item">
-      <div class="status approved" appFontSwitcher><span class="en" appFontSwitcher>Approved Transaction</span> - <span class="ar" appFontSwitcher>الصفقة المعتمدة</span></div>
+      <div class="status approved" appFontSwitcher><span class="en" appFontSwitcher>Approved Transaction</span> - <span class="ar" appFontSwitcher>العمليات الناجحة</span></div>
       <div class="details">
         <div class="one">
           <div class="title" appFontSwitcher>إجمالي المعاملة</div>
@@ -52,10 +52,10 @@
   </div>
   <div class="list-items lay">
     <div class="item">
-      <div class="status rejected" appFontSwitcher><span class="en" appFontSwitcher>Rejected Transaction</span> - <span class="ar" appFontSwitcher>الصفقة المرفوضة</span></div>
+      <div class="status rejected" appFontSwitcher><span class="en" appFontSwitcher>Rejected Transaction</span> - <span class="ar" appFontSwitcher>العمليات المرفوضة</span></div>
       <div class="details">
         <div class="one">
-          <div class="title" appFontSwitcher>إجمالي المعاملة</div>
+          <div class="title" appFontSwitcher>مبلغ العملية</div>
           <div class="amount" appFontSwitcher>
             <span class="value">{{ monthlyReport.totalRejectedTrans }}</span
             >Total Rejected transaction

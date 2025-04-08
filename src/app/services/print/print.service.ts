@@ -95,15 +95,15 @@ export class PrintService {
         <span class="ar">ريال</span>
       </div>
       <div class="ar text-center">${data.purchaseStatus === 'SUCCESS' ? 'مقبولة' : 'مرفوض'}</div>
-      <div class="en text-center font-600 mb-15">${data.purchaseStatus === 'SUCCESS' ? 'Approved' : 'Rejected'}</div>
+      <div class="en text-center font-600 mb-10">${data.purchaseStatus === 'SUCCESS' ? 'Approved' : 'Rejected'}</div>
+      ${data.message ? `
+        <span class="ar mb-15">(${data.message.trim()})</span>
+      ` : ''}
       ${data.purchaseTransId > 0 ? 
         `
           <div class="text-right">
             <span class="ar">رقم العملية</span>
             <span class="en"> ${data.purchaseTransId}</span>
-            ${data.message ? `
-              <span class="ar">(${data.message.trim()})</span>
-            ` : ''}
           </div>
         `
       : ''}
@@ -113,7 +113,7 @@ export class PrintService {
     return `
       <html>
         <head>
-          <meta name="viewport" content="width=58mm" />
+          <meta name="viewport" content="width=80mm" />
           <style>
             @media print {
               @page {
