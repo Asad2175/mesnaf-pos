@@ -61,8 +61,6 @@ export class RefundComponent {
   }
 
   public print(): void {
-    console.log('this.purchaseRes', this.purchaseRes);
-
     const data = {
       cardNo: this.purchaseRes.cardNo ?? '',
       purchaseTransId: Number(this.purchaseRes.transId),

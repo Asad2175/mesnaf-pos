@@ -6,7 +6,7 @@
     </div>
     <div class="amount" appFontSwitcher>{{ draftPurchaseRes.amount }}</div>
     <div class="coupen-text">
-      <div class="ar">:<span appFontSwitcher>مبلغ القسيمة</span></div>
+      <div class="ar">:<span appFontSwitcher>المبلغ</span></div>
     </div>
   </div>
   }
@@ -28,7 +28,7 @@
   <app-purchase-input
     (goNext)="validatePinCode($event)"
     [englishTitle]="'Please Enter the Coupon Pincode'"
-    [arabicTitle]="'الرجاء إدخال رمز الكوبون البريدي'"
+    [arabicTitle]="'ادخل الرقم السري للكوبون أو القسيمة'"
     [minValue]="4"
     [maxValue]="4"
     [error]="incorrectCoupenError"

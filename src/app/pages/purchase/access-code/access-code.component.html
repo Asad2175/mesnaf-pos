@@ -3,9 +3,9 @@
 }
 <div class="purchase-main-section" [class.mb-0]="step === 4">
   @if(step === 1) {
-  <app-amount (goNext)="validateAmount($event)" [englishTitle]="'New Purchase'" [arabicTitle]="'شراء جديد'"></app-amount>
+  <app-amount (goNext)="validateAmount($event)" [englishTitle]="'Enter Amount'" [arabicTitle]="'أدخل المبلغ'"></app-amount>
   } @else if(step === 2) {
-  <app-purchase-input (goNext)="validateAccessCode($event)" [arabicTitle]="'ادخل رقم الحساب او الرمز السري'" [minValue]="6"></app-purchase-input>
+  <app-purchase-input (goNext)="validateAccessCode($event)" [englishTitle]="'Enter Account No or Access Code'" [arabicTitle]="'ادخل رقم الحساب أو الرمز السريع'" [minValue]="6"></app-purchase-input>
   } @else if(step === 3) {
   <app-purchase-input (goNext)="validatePicCode($event)" [arabicTitle]="'ادخل الرقم السري للبطاقة'" [englishTitle]="'Enter PIN Code'" [minValue]="4" [maxValue]="4"></app-purchase-input>
   } @else if(step === 4) {

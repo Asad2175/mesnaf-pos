@@ -28,7 +28,7 @@
     [minValue]="5"
   ></app-purchase-input>
   } @else if(step === 2) {
-  <app-amount (goNext)="validateAmount($event)" [englishTitle]="'New Purchase'" [arabicTitle]="'ادخل مبلغ الاسترجاع'"></app-amount>
+  <app-amount (goNext)="validateAmount($event)" [englishTitle]="'Enter Amount'" [arabicTitle]="'أدخل المبلغ'"></app-amount>
   } @if(step === 3) {
   <app-purchase-input
     (goNext)="validateOtp($event)"

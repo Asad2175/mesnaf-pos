@@ -13,7 +13,7 @@
       }
     </div>
     <div class="text" [ngClass]="data.status ? 'approved' : 'rejected'">
-      <div class="ar" appFontSwitcher>{{ data.message }}</div>
+      <div class="ar" appFontSwitcher>@if(data.status) { مقبولة } @else { مرفوض }</div>
     </div>
   </div>
 

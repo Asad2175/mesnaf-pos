@@ -45,7 +45,6 @@ export class PrintService {
   }
 
   private buildHtml(data: Print): string {
-    console.log('data', data);
    const branchName = this.localStorage.get('branchName');
    const name = this.localStorage.get('name');
    const registrationNo = this.localStorage.get('registrationNo');
@@ -85,7 +84,7 @@ export class PrintService {
       ` : ''}
       <div class="flex-between mb-7 en font-600">
         <div>Purchase</div>
-        <div>شراء</div>
+        <div class="ar">شراء</div>
       </div>
       ${data.cardNo ? `<div class="en mb-15">${this.maskNumber(data.cardNo)}</div>` : ''}
       <div class="en mb-7">Purchase Amount: ${data.purchaseAmount} SAR</div>
@@ -97,7 +96,7 @@ export class PrintService {
       <div class="ar text-center">${data.purchaseStatus === 'SUCCESS' ? 'مقبولة' : 'مرفوض'}</div>
       <div class="en text-center font-600 mb-10">${data.purchaseStatus === 'SUCCESS' ? 'Approved' : 'Rejected'}</div>
       ${data.message ? `
-        <span class="ar mb-15">(${data.message.trim()})</span>
+        <div class="ar mb-15 text-center">(${data.message.trim()})</div>
       ` : ''}
       ${data.purchaseTransId > 0 ? 
         `
