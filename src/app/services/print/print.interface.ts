@@ -9,5 +9,6 @@ export interface Print {
     purchaseTransId: number,
     approvedRejectedDateTime: string
     itemList?: ItemList[],
-    message?:string
+    message?:string;
+    refund?: boolean
 }

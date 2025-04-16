@@ -69,7 +69,7 @@ export class RefundComponent {
       charityNumber: Number(this.purchaseRes.charityNo),
       charityName: this.purchaseRes.charityName ?? '',
       approvedRejectedDateTime: this.purchaseRes.startTransDate,
-  
+      refund: true
     } as Print;
   
     this.printService.printData(data);

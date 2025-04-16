@@ -87,7 +87,7 @@ export class PrintService {
         <div class="ar">شراء</div>
       </div>
       ${data.cardNo ? `<div class="en mb-15">${this.maskNumber(data.cardNo)}</div>` : ''}
-      <div class="en mb-7">Purchase Amount: ${data.purchaseAmount} SAR</div>
+      <div class="en mb-7">${data.refund ? 'Refund' : 'Purchase'} Amount: ${data.purchaseAmount} SAR</div>
       <div class="mb-7 text-right">
         <span class="ar">المبلغ</span>
         <span class="en">${data.purchaseAmount}</span>
